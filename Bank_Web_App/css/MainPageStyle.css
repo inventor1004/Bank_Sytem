@@ -1,0 +1,63 @@
+html {
+  margin: 0px;
+  background-color: white;
+}
+
+/*-----------------------------------------------------------------------------------------*/
+/*---- Body Style -------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
+
+#LoginFramework {
+  margin-left: 15rem;
+  margin-right: 15rem;
+  text-align: center;
+}
+
+#LogoImage {
+  margin-top: 100px;
+  width: 600px;
+  height: auto;
+}
+
+/* User Input Area */
+#InputArea {
+
+}
+
+#ID, #PW {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 400px;
+  height: 40px;
+
+  padding: 3px;
+  font-size: 23px;
+}
+
+#LoginButton {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 175px;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 23px;
+
+  background-color: #3498db;
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+}
+
+#LoginButton:hover {
+  background-color: black;
+}
+
+#ForgetPasswordPageLink, #SigninPageLink{
+  margin-left: 50px;
+  margin-right: 50px;
+
+  font-size: 20px;
+  font-weight:bold;
+}
