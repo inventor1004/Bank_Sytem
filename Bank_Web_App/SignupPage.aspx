@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SigninPage.aspx.cs" Inherits="BankWebApp.SigninPage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SignupPage.aspx.cs" Inherits="BankWebApp.SigninPage" %>
 
 <!DOCTYPE html>
 
