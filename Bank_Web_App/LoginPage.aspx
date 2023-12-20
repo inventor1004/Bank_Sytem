@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="content-type" content="text/html" charset="utf-8" />
-    <link rel="StyleSheet" href="./css/MainPageStyle.css"/>
+    <link rel="StyleSheet" href="./css/LoginPageStyle.css"/>
     <title> Login Page </title> 
 </head>
 <body>
