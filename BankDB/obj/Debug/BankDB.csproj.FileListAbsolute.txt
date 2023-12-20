@@ -1,0 +1,7 @@
+C:\Users\ChrisPark\Desktop\Bank System\Bank_Sytem\BankDB\bin\Debug\BankDB.exe.config
+C:\Users\ChrisPark\Desktop\Bank System\Bank_Sytem\BankDB\bin\Debug\BankDB.exe
+C:\Users\ChrisPark\Desktop\Bank System\Bank_Sytem\BankDB\bin\Debug\BankDB.pdb
+C:\Users\ChrisPark\Desktop\Bank System\Bank_Sytem\BankDB\obj\Debug\BankDB.csproj.AssemblyReference.cache
+C:\Users\ChrisPark\Desktop\Bank System\Bank_Sytem\BankDB\obj\Debug\BankDB.csproj.CoreCompileInputs.cache
+C:\Users\ChrisPark\Desktop\Bank System\Bank_Sytem\BankDB\obj\Debug\BankDB.exe
+C:\Users\ChrisPark\Desktop\Bank System\Bank_Sytem\BankDB\obj\Debug\BankDB.pdb
