@@ -144,12 +144,19 @@ namespace BankDB.Customer
         static bool IsValidPassword(string Password)
         {
             // ^: Indecates the start of string
-            // [a-zA-Z0-9!@#$%^&*()-_+=]
-            //   >> Allow Lowercase alpha bet, upper case alphabet, sort of special characters(!@#$%^&*()-_+=)
-            // { 10,}
-            //   >> The length should be at least 10 characters
+            // (?= ...): Indicates a lookahead, checking each condition.
+            // (?=.*[a-z])
+            //   >> Must contain at least one lowercase letter
+            // (?=.*[A-Z])
+            //   >> Must contain at least one uppercase letter
+            // (?=.*\d)
+            //   >> Must contain at least one number
+            // (?=.*[!@#$%^&*()-_+=])
+            //   >> It must contain at least one special character
+            // .{10,}
+            //   >> Must be a string of at least 10 characters
             // $: Indecates the end of string
-            string pattern = @"^[a-zA-Z0-9!@#$%^&*()-_+=]{10,}$";
+            string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_+=]).{10,}$";
 
             // Pass the validation pattern to the regular expression & return the result
             Regex regex = new Regex(pattern);
