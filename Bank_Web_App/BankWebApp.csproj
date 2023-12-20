@@ -69,7 +69,7 @@
   <ItemGroup>
     <Content Include="ForgetPasswordPage.aspx" />
     <Content Include="LoginPage.aspx" />
-    <Content Include="SigninPage.aspx" />
+    <Content Include="SignupPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -88,12 +88,12 @@
       <DependentUpon>LoginPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SigninPage.aspx.cs">
-      <DependentUpon>SigninPage.aspx</DependentUpon>
+    <Compile Include="SignupPage.aspx.cs">
+      <DependentUpon>SignupPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SigninPage.aspx.designer.cs">
-      <DependentUpon>SigninPage.aspx</DependentUpon>
+    <Compile Include="SignupPage.aspx.designer.cs">
+      <DependentUpon>SignupPage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
