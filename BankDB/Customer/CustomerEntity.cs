@@ -96,7 +96,7 @@ namespace BankDB.Customer
         public int SetPassword(string password)
         {
             const int kSuccess = 1, KTooShort = -1, kTooLong = -2, KInvalidPattern = -3;
-            const int kMinimumLength = 10, KMaximumNum = 16;
+            const int kMinimumLength = 10, KMaximumNum = 20;
             // check whether the passowrd is too short or not
             if (password.Length > kMinimumLength)
             {

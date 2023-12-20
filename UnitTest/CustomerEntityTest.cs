@@ -30,11 +30,11 @@ namespace UnitTest
             try
             {
                 // Test whether the email address sets successfully
-                int isreturnMinusTwo = entity.SetEmail(validEmail);
-                Assert.IsTrue(isreturnMinusTwo == 1);
+                int isReturnOne = entity.SetEmail(validEmail);
+                Assert.IsTrue(isReturnOne == 1);
 
-                isreturnMinusTwo = entity.SetEmail(validEmailWithSpecialChar);
-                Assert.IsTrue(isreturnMinusTwo == 1);
+                isReturnOne = entity.SetEmail(validEmailWithSpecialChar);
+                Assert.IsTrue(isReturnOne == 1);
             }
             catch (Exception ex)
             {
@@ -64,16 +64,46 @@ namespace UnitTest
             try
             {
                 // Check if validation is successful when entering special characters not included in the pattern
-                int isreturnMinusTwo = entity.SetEmail(invalidLocalPart);
-                Assert.IsTrue(isreturnMinusTwo == -2);
+                int isReturnMinusTwo = entity.SetEmail(invalidLocalPart);
+                Assert.IsTrue(isReturnMinusTwo == -2);
 
                 // Check whether it is validated well if the domain part including @ is missing in the email
-                isreturnMinusTwo = entity.SetEmail(missingDomainPart);
-                Assert.IsTrue(isreturnMinusTwo == -2);
+                isReturnMinusTwo = entity.SetEmail(missingDomainPart);
+                Assert.IsTrue(isReturnMinusTwo == -2);
 
                 // Check whether it is validated well if the top-level domain part including . is missing in the email
-                isreturnMinusTwo = entity.SetEmail(missingTopLevelDomainPart);
-                Assert.IsTrue(isreturnMinusTwo == -2);
+                isReturnMinusTwo = entity.SetEmail(missingTopLevelDomainPart);
+                Assert.IsTrue(isReturnMinusTwo == -2);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
+
+        [TestMethod]
+        /*
+         * Function    : TestSetPasswordValidPattern()
+         * Desctription: Test whether the SETPassword method sets the password properly or not
+         *               >> Validation Condition: 1. Uppercase letter
+         *                                        2. Lowercase letter
+         *                                        3. Number
+         *                                        4. Special character
+         *                                        5. Over 10 characters
+         *              -* the SetEmail() should return 1 *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetPasswordValidPattern()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            string validPassword = "Ab1!@#$%^&*()-_+=";
+
+            try
+            {
+                // Test whether the passowrd sets successfully
+                int isReturnOne = entity.SetPassword(validPassword);
+                Assert.IsTrue(isReturnOne == 1);
             }
             catch (Exception ex)
             {
