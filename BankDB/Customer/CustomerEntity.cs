@@ -24,7 +24,7 @@ namespace BankDB.Customer
         private string PhoneNumber;
 
         /*--------------------------------------------------------------------------------------------------*/
-        /***** SET & GET Functions **************************************************************************/
+        /***** SET & GET Methods ****************************************************************************/
         /*--------------------------------------------------------------------------------------------------*/
         internal const bool kSuccess = true;
         internal const bool kFailure = false;
@@ -84,6 +84,19 @@ namespace BankDB.Customer
 
         public string GetPassword() { return this.Password; }
 
+        /*
+         * Function    : SetPassword()
+         * Desctription: Check the password(input) and set it to Password data member if an input satisfy the blow conditions
+         *               [Conditions]:
+         *                  1. The length of the password should be longer than 10
+         *                  2. The length of the password should be shorter than 20
+         *                  3. The password sould contain at least on lowercase letter, uppercase letter, number, and special character
+         * Parameter   : string Email
+         * Return      : int  - kSuccess        = 1
+         *                    - KTooShort       = -1
+         *                    - kTooLong        = -2
+         *                    - KInvalidPattern = -3
+         */
         public int SetPassword(string password)
         {
             const int kSuccess = 1, KTooShort = -1, kTooLong = -2, KInvalidPattern = -3;
@@ -130,11 +143,37 @@ namespace BankDB.Customer
         }
 
 
+        public string GetLastName() { return this.LastName; }
 
-    /*--------------------------------------------------------------------------------------------------*/
-    /***** Validation Methods ***************************************************************************/
-    /*--------------------------------------------------------------------------------------------------*/
-    static bool IsValidEmail(string email)
+        /*
+         * Function    : SetLastName()
+         * Desctription: Set it to FirstName data member if its length is not greater than the maximum size of SQL raw
+         * Parameter   : string firstName
+         * Return      : int  - kSuccess         = 1
+         *                    - KTooLong         = -1
+         *                    - kNotBlankAllowed = -2
+         */
+        public int SetLastName(string lastName)
+        {
+            const int kSuccess = 1, KTooLong = -1, kNotBlankAllowed = -2;
+            const int kMinimumLength = 50;
+            if (lastName.Length <= kMinimumLength)
+            {
+                // Check whether the blank exists in the input or not
+                if (!lastName.Contains(' '))
+                {
+                    this.LastName = lastName;
+                    return kSuccess;
+                }
+                else return kNotBlankAllowed;
+            }
+            else { return KTooLong; }
+        }
+
+        /*--------------------------------------------------------------------------------------------------*/
+        /***** Validation Methods ***************************************************************************/
+        /*--------------------------------------------------------------------------------------------------*/
+        static bool IsValidEmail(string email)
         {
             // ^: Indecates the start of string
             // [a-zA-Z0-9._%+-]: Indecates local part string validation

@@ -259,5 +259,82 @@ namespace UnitTest
                 Assert.Fail($"An exception occurred: {ex.Message}");
             }
         }
+
+
+        [TestMethod]
+        /*
+         * Function    : TestSetLastNameValidInput()
+         * Desctription: Test whether the SetLastName sets the value properly when a valid input is passed.
+         *              -* the SetLastName() should return 1 *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetLastNameValidInput()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            string validLastName = "Test";
+
+            try
+            {
+                // Test whether the SET method identify invalid length and return proper value for the invalid status
+                int isReturnOne = entity.SetLastName(validLastName);
+                Assert.IsTrue(isReturnOne == 1);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
+
+
+        [TestMethod]
+        /*
+         * Function    : TestSetFirstNameInValidInput()
+         * Desctription: Test whether the SetLastName() validate properly when an invalid length of input is passed
+         *              -* the SetFristName() should return -1 *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetLastNameInValidLength()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            string invalidLastName = "012345678901234567890123456789012345678901234567890";
+
+            try
+            {
+                // Test whether the SET method identify invalid length and return proper value for the invalid status
+                int isReturnMinusOne = entity.SetLastName(invalidLastName);
+                Assert.IsTrue(isReturnMinusOne == -1);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
+
+        [TestMethod]
+        /*
+         * Function    : TestSetFirstNameInValidInput()
+         * Desctription: Test whether the SetLastName() validate properly when an invalid pattern of input(contains blank) is passed
+         *              -* the SetFristName() should return -2 *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetLastNameInValidPattern()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            string invalidLastName = "Last Name";
+
+            try
+            {
+                // Test whether the SET method identify invalid length and return proper value for the invalid status
+                int isReturnMinusOne = entity.SetLastName(invalidLastName);
+                Assert.IsTrue(isReturnMinusOne == -2);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
     }
 }
