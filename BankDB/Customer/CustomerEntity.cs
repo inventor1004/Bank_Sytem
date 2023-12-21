@@ -98,10 +98,10 @@ namespace BankDB.Customer
             const int kSuccess = 1, KTooShort = -1, kTooLong = -2, KInvalidPattern = -3;
             const int kMinimumLength = 10, KMaximumNum = 20;
             // check whether the passowrd is too short or not
-            if (password.Length > kMinimumLength)
+            if (password.Length >= kMinimumLength)
             {
                 // check whether the passowrd is too long or not
-                if (password.Length < KMaximumNum)
+                if (password.Length <= KMaximumNum)
                 {
                     // check whether the passowrd meets pattern
                     if (IsValidPassword(password))
@@ -156,11 +156,39 @@ namespace BankDB.Customer
             // .{10,}
             //   >> Must be a string of at least 10 characters
             // $: Indecates the end of string
-            string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_+=]).{10,}$";
+            string patternLowercase   = @"^(?=.*[a-z])";
+            string patternUppercase   = @"^(?=.*[A-Z])";
+            string patternDigit       = @"^(?=.*\d)";
+            string patternSpecialChar = "!@#$%^&*()-_+=";
+            string patternLength      = @"^.{10,}$";
 
-            // Pass the validation pattern to the regular expression & return the result
-            Regex regex = new Regex(pattern);
-            return regex.IsMatch(Password);
+            
+            // Make regular expression for each pattern
+            Regex regexLowercase   = new Regex(patternLowercase);
+            Regex regexUppercase   = new Regex(patternUppercase);
+            Regex regexDigit       = new Regex(patternDigit);
+            Regex regexSpecialChar = new Regex(patternSpecialChar);
+            Regex regexLength      = new Regex(patternLength);
+
+
+            // check each pattern's condition
+            bool hasLowercase   = regexLowercase.IsMatch(Password);
+            bool hasUppercase   = regexUppercase.IsMatch(Password);
+            bool hasDigit       = regexDigit.IsMatch(Password);
+            bool hasSpecialChar = false;
+
+            // Check whether the password contains special character or not
+            foreach (char c in Password)
+            {
+                if (patternSpecialChar.Contains(c))
+                {
+                    hasSpecialChar = true;
+                }
+            }
+
+            // Make sure password follows all the pattern
+            bool isValidPassword = hasLowercase && hasUppercase && hasDigit && hasSpecialChar && regexLength.IsMatch(Password);
+            return isValidPassword;
         }
     }
 }

@@ -110,5 +110,103 @@ namespace UnitTest
                 Assert.Fail($"An exception occurred: {ex.Message}");
             }
         }
+
+        [TestMethod]
+        /*
+         * Function    : TestSetPasswordInvalidShorterLength()
+         * Desctription: Test whether the SETPassword method catch invalid length of the password input properly or not
+         *                >> The test input has all the essential components, but the length is a total of 4 characters, 
+         *                  which is less than the minimum requirement of 10 characters.
+         *              -* the SetEmail() should return -1 *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetPasswordInvalidShorterLength()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            string invalidPassword = "Ab1!";
+
+            try
+            {
+                // Test whether the SET method identify invalid length and return proper value for the invalid status
+                int isReturnMinusOne = entity.SetPassword(invalidPassword);
+                Assert.IsTrue(isReturnMinusOne == -1);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
+
+
+        [TestMethod]
+        /*
+         * Function    : TestSetPasswordInvalidLongerLength()
+         * Desctription: Test whether the SETPassword method catch invalid length of the password input properly or not
+         *                >> The test input has all the essential components, but the length is a total of 30 characters, 
+         *                  which exceeds than the maximum requirement of 20 characters.
+         *              -* the SetEmail() should return -2 *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetPasswordInvalidLongerLength()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            string invalidPassword = "ABCDEFabcdef123456!@#$%^&*()-_";
+
+            try
+            {
+                // Test whether the SET method identify invalid length and return proper value for the invalid status
+                int isReturnMinusTwo = entity.SetPassword(invalidPassword);
+                Assert.IsTrue(isReturnMinusTwo == -2);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
+
+        [TestMethod]
+        /*
+         * Function    : TestSetPasswordInvalidMissingCharacter()
+         * Desctription: Test whether the SETPassword method catches invalid pattern of the password input properly or not
+         *               It will be tested by below input conditions:
+         *                >> 1. Missing lowercase letter
+         *                >> 2. Missing uppercase letter
+         *                >> 3. Missing number
+         *                >> 4. Missing speical chracter
+         *              -* the SetEmail() should return -3 *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetPasswordInvalidMissingCharacter()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            string specialCharacterMissed = "ABCDabcd1234";
+            string numberMissed           = "ABCDabcd!@#$";
+            string lowerCaseMissed        = "ABCD1234!@#$";
+            string upperCaseMissed        = "abcd1234!@#$";
+
+
+            try
+            {
+                // Test whether the SET method identify invalid length and return proper value for the invalid status
+                int isReturnMinusThree = entity.SetPassword(upperCaseMissed);
+                Assert.IsTrue(isReturnMinusThree == -3);
+
+                isReturnMinusThree = entity.SetPassword(lowerCaseMissed);
+                Assert.IsTrue(isReturnMinusThree == -3);
+
+                isReturnMinusThree = entity.SetPassword(numberMissed);
+                Assert.IsTrue(isReturnMinusThree == -3);
+
+                isReturnMinusThree = entity.SetPassword(specialCharacterMissed);
+                Assert.IsTrue(isReturnMinusThree == -3);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
     }
 }
