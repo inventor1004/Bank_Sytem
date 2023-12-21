@@ -208,5 +208,56 @@ namespace UnitTest
                 Assert.Fail($"An exception occurred: {ex.Message}");
             }
         }
+
+
+        [TestMethod]
+        /*
+         * Function    : TestSetFirstNameValidInput()
+         * Desctription: Test whether the SetFirstName sets the value properly when a valid input is passed.
+         *              -* the SetFristName() should return 1 *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetFirstNameValidInput()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            string validFirstName = "Test";
+
+            try
+            {
+                // Test whether the SET method identify invalid length and return proper value for the invalid status
+                int isReturnOne = entity.SetFirstName(validFirstName);
+                Assert.IsTrue(isReturnOne == 1);            
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
+
+        [TestMethod]
+        /*
+         * Function    : TestSetFirstNameInValidInput()
+         * Desctription: Test whether the SetFirstName() validate properly when an invalid input is passed
+         *              -* the SetFristName() should return -1 *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetFirstNameInValidInput()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            string invalidFirstName = "012345678901234567890123456789012345678901234567890";
+
+            try
+            {
+                // Test whether the SET method identify invalid length and return proper value for the invalid status
+                int isReturnMinusOne = entity.SetFirstName(invalidFirstName);
+                Assert.IsTrue(isReturnMinusOne == -1);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
     }
 }

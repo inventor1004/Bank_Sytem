@@ -29,10 +29,7 @@ namespace BankDB.Customer
         internal const bool kSuccess = true;
         internal const bool kFailure = false;
 
-        public uint GetCustomerID()
-        {
-            return this.CustomerID;
-        }
+        public uint GetCustomerID() { return this.CustomerID; }
 
         /*
          * Function    : SetCustomerID()
@@ -54,10 +51,7 @@ namespace BankDB.Customer
         }
 
 
-        public string GetEmail()
-        {
-            return this.Email;
-        }
+        public string GetEmail() { return this.Email; }
 
         /*
          * Function    : SetEmail()
@@ -88,10 +82,7 @@ namespace BankDB.Customer
         }
 
 
-        public string GetPassword()
-        {
-            return this.Password;
-        }
+        public string GetPassword() { return this.Password; }
 
         public int SetPassword(string password)
         {
@@ -115,13 +106,35 @@ namespace BankDB.Customer
                 else return kTooLong;
             }
             else return KTooShort;
-
         }
 
-        /*--------------------------------------------------------------------------------------------------*/
-        /***** Validation Methods ***************************************************************************/
-        /*--------------------------------------------------------------------------------------------------*/
-        static bool IsValidEmail(string email)
+        public string GetFirstName() { return this.FirstName; }
+
+        /*
+         * Function    : SetFirstName()
+         * Desctription: Set it to FirstName data member if its length is not greater than the maximum size of SQL raw
+         * Parameter   : string firstName
+         * Return      : int  - kSuccess     = 1
+         *                    - KTooLong     = -1
+         */
+        public int SetFirstName(string firstName) 
+        {
+           const int kSuccess = 1, KTooLong = -1;
+           const int kMinimumLength = 50;
+           if (firstName.Length <= kMinimumLength)
+           {
+               this.FirstName = firstName;
+               return kSuccess;
+           }
+           else { return KTooLong; }
+        }
+
+
+
+    /*--------------------------------------------------------------------------------------------------*/
+    /***** Validation Methods ***************************************************************************/
+    /*--------------------------------------------------------------------------------------------------*/
+    static bool IsValidEmail(string email)
         {
             // ^: Indecates the start of string
             // [a-zA-Z0-9._%+-]: Indecates local part string validation
