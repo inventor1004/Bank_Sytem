@@ -336,5 +336,78 @@ namespace UnitTest
                 Assert.Fail($"An exception occurred: {ex.Message}");
             }
         }
+
+
+        [TestMethod]
+        /*
+         * Function    : TestSetLPostalCoedValidInput()
+         * Desctription: Check SetPostalCode() sets the value properly when entering the postal code of the correct pattern
+         *              -* the SetFristName() should return 1 *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetLPostalCoedValidInputs()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            string postalCodeWithoutSpace = "A1A1A1";       // Postal Code without space 
+            string postalLowerCaseLetter= "a1a1a1";         // Postal Code with lowercase letters
+            string postalCodeWithSpace = "A1A 1A1";         // Postal Code with space 
+
+
+            try
+            {
+                // Test whether the SET method sets the postal code properly 
+                int isReturnOne = entity.SetPostalCode(postalCodeWithoutSpace);
+                Assert.IsTrue(isReturnOne == 1);
+
+                isReturnOne = entity.SetPostalCode(postalLowerCaseLetter);
+                Assert.IsTrue(isReturnOne == 1);
+
+                isReturnOne = entity.SetPostalCode(postalCodeWithSpace);
+                Assert.IsTrue(isReturnOne == 1);
+
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
+
+        [TestMethod]
+        /*
+         * Function    : TestSetLPostalCoedInvalidInputs()
+         * Desctription: Check SetPostalCode() catches an invalid postal code inputs
+         *              -* the SetFristName() should return -1 *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetLPostalCoedInvalidInputs()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            string lengthIncorrect = "A1A1A1A";    
+            string extraSpace      = "a1a 1a1 ";    
+            string reversedPattern = "1A1 A1A";       
+
+
+            try
+            {
+                // Test whether the SET method sets the postal code properly 
+                int isReturnMinusOne = entity.SetPostalCode(lengthIncorrect);
+                Assert.IsTrue(isReturnMinusOne == -1);
+
+                isReturnMinusOne = entity.SetPostalCode(extraSpace);
+                Assert.IsTrue(isReturnMinusOne == -1);
+
+                isReturnMinusOne = entity.SetPostalCode(reversedPattern);
+                Assert.IsTrue(isReturnMinusOne == -1);
+
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
     }
 }

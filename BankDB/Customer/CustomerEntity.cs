@@ -20,6 +20,7 @@ namespace BankDB.Customer
         private string FirstName;
         private string LastName;
         private string DateOfBirth;
+        private string PostalCode;
         private string Address;
         private string PhoneNumber;
 
@@ -148,7 +149,7 @@ namespace BankDB.Customer
         /*
          * Function    : SetLastName()
          * Desctription: Set it to FirstName data member if its length is not greater than the maximum size of SQL raw
-         * Parameter   : string firstName
+         * Parameter   : string LastName
          * Return      : int  - kSuccess         = 1
          *                    - KTooLong         = -1
          *                    - kNotBlankAllowed = -2
@@ -168,6 +169,56 @@ namespace BankDB.Customer
                 else return kNotBlankAllowed;
             }
             else { return KTooLong; }
+        }
+
+
+        public string GetDateOfBirth()
+        {
+            return this.DateOfBirth;
+        }
+
+        public void SetDateOfBirth(DateTime DateOfBirth)
+        {
+
+            // type casting dateOfBirth to string & parse only the year-month-date part
+            this.DateOfBirth = DateOfBirth.ToString("yyyy-MM-dd");
+        }
+
+
+        public string GetPostalCode() { return this.PostalCode; }
+
+        /*
+         * Function    : SetPostalCode()
+         * Desctription: Set it to PostalCode data member if input has valid Canadian postal code pattern
+         * Parameter   : string postalCode
+         * Return      : int  - kSuccess     = 1
+         *                    - kInvalidCode = -1
+         */
+        public int SetPostalCode(string postalCode)
+        {
+            const int kSuccess = 1, kInvalidCode = -1;
+            const int kWithoutSpace = 6, kWithSpace = 7;
+
+            // Add the sapce if the postal code do not have bank
+            if(postalCode.Length == kWithoutSpace)
+            {
+                // StringBuilder: A class in C# used to perform string manipulation operations.
+                StringBuilder stringBuilder = new StringBuilder(postalCode);
+                postalCode = stringBuilder.Insert(3, ' ').ToString();
+            }
+
+            if (postalCode.Length == kWithSpace)
+            {
+                // Change all lowercase letter to uppercase letter
+                postalCode = postalCode.ToUpper();
+                if (IsValidPostalCode(postalCode))
+                {
+                    this.PostalCode = postalCode;
+                    return kSuccess;
+                }
+            }
+
+            return kInvalidCode;
         }
 
         /*--------------------------------------------------------------------------------------------------*/
@@ -195,19 +246,15 @@ namespace BankDB.Customer
 
         static bool IsValidPassword(string Password)
         {
-            // ^: Indecates the start of string
-            // (?= ...): Indicates a lookahead, checking each condition.
-            // (?=.*[a-z])
-            //   >> Must contain at least one lowercase letter
-            // (?=.*[A-Z])
-            //   >> Must contain at least one uppercase letter
-            // (?=.*\d)
-            //   >> Must contain at least one number
-            // (?=.*[!@#$%^&*()-_+=])
-            //   >> It must contain at least one special character
-            // .{10,}
-            //   >> Must be a string of at least 10 characters
-            // $: Indecates the end of string
+            /* Password Regular Expression
+             * ^          : Indecates the start of string
+             * (?= ...)   : Indicates a lookahead, checking each condition.
+             * (?=.*[a-z]): Must contain at least one lowercase letter
+             * (?=.*[A-Z]): Must contain at least one uppercase letter
+             * (?=.*\d)   : Must contain at least one number
+             * .{10,}     : Must be a string of at least 10 characters
+             * $: Indecates the end of string
+             */
             string patternLowercase   = @"^(?=.*[a-z])";
             string patternUppercase   = @"^(?=.*[A-Z])";
             string patternDigit       = @"^(?=.*\d)";
@@ -219,7 +266,6 @@ namespace BankDB.Customer
             Regex regexLowercase   = new Regex(patternLowercase);
             Regex regexUppercase   = new Regex(patternUppercase);
             Regex regexDigit       = new Regex(patternDigit);
-            Regex regexSpecialChar = new Regex(patternSpecialChar);
             Regex regexLength      = new Regex(patternLength);
 
 
@@ -241,6 +287,27 @@ namespace BankDB.Customer
             // Make sure password follows all the pattern
             bool isValidPassword = hasLowercase && hasUppercase && hasDigit && hasSpecialChar && regexLength.IsMatch(Password);
             return isValidPassword;
+        }
+
+
+        static bool IsValidPostalCode(string postalCode)
+        {
+            /* Postal Code Regular Expression (A1A 1A1)
+             * ^[A-Z] : String starts with an uppercase letter
+             *   \d   : A number appears
+             *   [A-Z]: Uppercase alphabet appears
+             *        : A space appears
+             *   \d   : A number appears
+             *   [A-Z]: Uppercase alphabet appears
+             *   \d$  : ends with a number
+             */
+            string CanadaPostalCodePattern = "^[A-Z]\\d[A-Z] \\d[A-Z]\\d$";
+
+            // Make regular expression for each pattern
+            Regex regexPostalCode = new Regex(CanadaPostalCodePattern);
+
+            // return the result
+            return regexPostalCode.IsMatch(postalCode);
         }
     }
 }

@@ -12,7 +12,7 @@ CREATE TABLE Customer(
     DateOfBirth DATE NOT NULL,
     PostalCode VARCHAR(7) NOT NULL,
     Address VARCHAR(320) NOT NULL,
-    PhoneNumber VARCHAR(15) NOT NULL UNIQUE
+    PhoneNumber INT(10) NOT NULL UNIQUE
 );
 
 DROP TABLE IF EXISTS `Account`;
