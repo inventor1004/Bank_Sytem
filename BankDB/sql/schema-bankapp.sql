@@ -11,6 +11,8 @@ CREATE TABLE Customer(
     LastName VARCHAR(50) NOT NULL,
     DateOfBirth DATE NOT NULL,
     PostalCode VARCHAR(7) NOT NULL,
+    Province VARCHAR(25) NOT NULL,
+    City VARCHAR(25) NOT NULL,
     Address VARCHAR(320) NOT NULL,
     PhoneNumber INT(10) NOT NULL UNIQUE
 );

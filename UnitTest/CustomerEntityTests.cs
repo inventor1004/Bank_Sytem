@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
 namespace UnitTest
 {
     [TestClass]
-    public class CustomerEntityTest
+    public class CustomerEntityTests
     {
         [TestMethod]
         /*

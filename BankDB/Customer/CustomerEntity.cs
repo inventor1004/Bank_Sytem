@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
-using System.Net.Mail;
 
 
 namespace BankDB.Customer
@@ -21,6 +18,8 @@ namespace BankDB.Customer
         private string LastName;
         private string DateOfBirth;
         private string PostalCode;
+        private string Province;
+        private string City;
         private string Address;
         private string PhoneNumber;
 
@@ -182,6 +181,8 @@ namespace BankDB.Customer
 
             // type casting dateOfBirth to string & parse only the year-month-date part
             this.DateOfBirth = DateOfBirth.ToString("yyyy-MM-dd");
+
+            /*미래의 날자를 선택하면 error*/
         }
 
 
@@ -220,6 +221,10 @@ namespace BankDB.Customer
 
             return kInvalidCode;
         }
+
+
+        public string GetAddress() { return this.Address; }
+
 
         /*--------------------------------------------------------------------------------------------------*/
         /***** Validation Methods ***************************************************************************/
