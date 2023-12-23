@@ -468,8 +468,8 @@ namespace UnitTest
         [TestMethod]
         /*
          * Function    : TestSetProvinceValidInput()
-         * Desctription: Check SeProvince() seting valid input properly or not
-         *              -* the SeProvince() should return true *-
+         * Desctription: Check SetProvince() seting valid input properly or not
+         *              -* the SetProvince() should return true *-
          * Parameter   : void
          * Return      : void
          */
@@ -494,8 +494,8 @@ namespace UnitTest
         [TestMethod]
         /*
          * Function    : TestSetProvinceInvalidInput()
-         * Desctription: Check SeProvince() catching invalid input properly or not
-         *              -* the SeProvince() should return true *-
+         * Desctription: Check SetProvince() catching invalid input properly or not
+         *              -* the SetProvince() should return false *-
          * Parameter   : void
          * Return      : void
          */
@@ -508,6 +508,117 @@ namespace UnitTest
             {
                 // Test whether the SET method catches the error when it takes not exist province name in Province Table
                 bool isReturnFalse = entity.SetProvince(invalidProvince);
+                Assert.IsFalse(isReturnFalse);
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
+
+
+        [TestMethod]
+        /*
+         * Function    : TestSetCityValidInput()
+         * Desctription: Check SetCity() seting valid input properly or not
+         *              -* the SetCity() should return true *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetCityValidInput()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            string validCity = "Vanscoy No. 345";
+
+            try
+            {
+                // Test whether the SET method validate input properly and set the input as a data member
+                bool isReturnTrue = entity.SetCity(validCity);
+                Assert.IsTrue(isReturnTrue);
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
+
+        [TestMethod]
+        /*
+         * Function    : TestSetCityInvalidInput()
+         * Desctription: Check SetProvince() catching invalid input properly or not
+         *              -* the SetProvince() should return true *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetCityInvalidInput()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            string invalidCity = "Test";
+
+            try
+            {
+                // Test whether the SET method catches the error when it takes not exist province name in Province Table
+                bool isReturnFalse = entity.SetCity(invalidCity);
+                Assert.IsFalse(isReturnFalse);
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
+
+
+        [TestMethod]
+        /*
+         * Function    : TestSetPhoneNumberValidInput()
+         * Desctription: Check SetPhoneNumber() sets the valid input phone number properly or not
+         *              -* the SetPhoneNumber() should return true *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetPhoneNumberValidInput()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            string validNumber = "1234567890";
+
+            try
+            {
+                // Test whether the SET method sets the valid input phone number
+                bool isReturnTrue = entity.SetPhoneNumber(validNumber);
+                Assert.IsTrue(isReturnTrue);
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
+
+
+        [TestMethod]
+        /*
+         * Function    : TestSetPhoneNumberInvalidInput()
+         * Desctription: Check SetPhoneNumber() catching invalid input properly or not
+         *              -* the SetPhoneNumber() should return false *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetPhoneNumberInvalidInput()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            string overLengthNumber = "01234567890";
+            string notNumber = "test";
+
+            try
+            {
+                // Test whether the SET method sets the valid input phone number
+                bool isReturnFalse = entity.SetPhoneNumber(overLengthNumber);
+                Assert.IsFalse(isReturnFalse);
+
+                isReturnFalse = entity.SetPhoneNumber(notNumber);
                 Assert.IsFalse(isReturnFalse);
 
             }

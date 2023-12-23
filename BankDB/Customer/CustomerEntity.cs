@@ -293,6 +293,94 @@ namespace BankDB.Customer
         }
 
 
+        public string GetCity() { return this.City; }
+        /*
+         * Function    : SetProvince()
+         * Desctription: SetProvince() checks whether the input exists in the Province Table of the Canada Database
+         *              and returns true after setting if it exists, otherwise returns false.
+         * Parameter   : string province
+         * Return      : bool  - kSuccess         = true
+         *                     - kInvalidProvince = false
+         */
+        public bool SetCity(string city)
+        {
+            const bool kSuccess = true, kInvalidProvince = false;
+
+            // Set the conection condition of MYSQL data server
+            // & Ready to excute quary command
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            MySqlCommand command = new MySqlCommand();
+            MySqlDataReader reader;
+            command.Connection = connection;
+
+
+            // SQL Syntax
+            // >> Retrive all the province data from SQL Canda Database
+            string sqlCmd = "SELECT City_Name FROM City;";
+
+            try
+            {
+                // Open the connection and read all province data
+                command.CommandText = sqlCmd;
+                connection.Open();
+                reader = command.ExecuteReader();
+
+
+                while (reader.Read())
+                {
+                    // Check whether the province name is valid or not
+                    if (reader["City_Name"].ToString() == city)
+                    {
+                        // When the input province is validated, set the input
+                        this.City = reader["City_Name"].ToString();
+                        return kSuccess;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Log("An exception occurred: " + DateTime.Now.ToString() + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return kInvalidProvince;
+        }
+
+
+        public string GetAddress() { return this.Address; }
+        public bool SetAddress(string address)
+        {
+            const bool kSuccess = true, kInvalidAddress = false;
+            const int maxLength = 320;
+            if(address.Length <= maxLength)
+            {
+                this.Address = address;
+                return kSuccess;
+            }
+
+            return kInvalidAddress;
+        }
+
+        public string GetPhoneNumber() { return this.PhoneNumber; }
+        public bool SetPhoneNumber (string phoneNumber)
+        {
+            const bool kSuccess = true, kInvalidNumber = false;
+            const int numberLength = 10;
+            if (phoneNumber.Length == numberLength)
+            {
+                if(int.TryParse(phoneNumber, out int result))
+                {
+                    this.PhoneNumber = phoneNumber;
+                    return kSuccess;
+                }
+                else return kInvalidNumber;
+            }
+            return kInvalidNumber;
+        }
+
         /*--------------------------------------------------------------------------------------------------*/
         /***** Validation Methods ***************************************************************************/
         /*--------------------------------------------------------------------------------------------------*/
