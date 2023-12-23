@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Configuration;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -234,9 +236,60 @@ namespace BankDB.Customer
 
 
         public string GetProvince() { return this.Province; }
-        public int SetProvince(string province)
-        {
 
+        /*
+         * Function    : SetProvince()
+         * Desctription: SetProvince() checks whether the input exists in the Province Table of the Canada Database
+         *              and returns true after setting if it exists, otherwise returns false.
+         * Parameter   : string province
+         * Return      : bool  - kSuccess         = true
+         *                     - kInvalidProvince = false
+         */
+        public bool SetProvince(string province)
+        {
+            const bool kSuccess = true, kInvalidProvince = false;
+
+            // Set the conection condition of MYSQL data server
+            // & Ready to excute quary command
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            MySqlCommand command = new MySqlCommand();
+            MySqlDataReader reader;
+            command.Connection = connection;
+
+
+            // SQL Syntax
+            // >> Retrive all the province data from SQL Canda Database
+            string sqlCmd = "SELECT Province_Name FROM province;";
+
+            try
+            {
+                // Open the connection and read all province data
+                command.CommandText = sqlCmd;
+                connection.Open();
+                reader = command.ExecuteReader();
+
+
+                while (reader.Read())
+                {
+                    // Check whether the province name is valid or not
+                    if (reader["Province_Name"].ToString() == province)
+                    {
+                        // When the input province is validated, set the input
+                        this.Province = reader["Province_Name"].ToString();
+                        return kSuccess;
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Logger.Log("An exception occurred: " + DateTime.Now.ToString() + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return kInvalidProvince;
         }
 
 

@@ -463,5 +463,58 @@ namespace UnitTest
                 Assert.Fail($"An exception occurred: {ex.Message}");
             }
         }
+
+
+        [TestMethod]
+        /*
+         * Function    : TestSetProvinceValidInput()
+         * Desctription: Check SeProvince() seting valid input properly or not
+         *              -* the SeProvince() should return true *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetProvinceValidInput()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            string validProvince = "Newfoundland and Labrador";
+
+            try
+            {
+                // Test whether the SET method validate input properly and set the input as a data member
+                bool isReturnTrue = entity.SetProvince(validProvince);
+                Assert.IsTrue(isReturnTrue);
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
+
+        [TestMethod]
+        /*
+         * Function    : TestSetProvinceInvalidInput()
+         * Desctription: Check SeProvince() catching invalid input properly or not
+         *              -* the SeProvince() should return true *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetProvinceInvalidInput()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            string invalidProvince = "Test";
+
+            try
+            {
+                // Test whether the SET method catches the error when it takes not exist province name in Province Table
+                bool isReturnFalse = entity.SetProvince(invalidProvince);
+                Assert.IsFalse(isReturnFalse);
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
     }
 }
