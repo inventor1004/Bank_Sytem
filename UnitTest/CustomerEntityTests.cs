@@ -4,13 +4,14 @@ using System.Configuration;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BankDB.Customer;
-using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
 
 namespace UnitTest
 {
     [TestClass]
     public class CustomerEntityTests
     {
+        private string connectionString = ConfigurationManager.AppSettings["connectionString"];
+
         [TestMethod]
         /*
          * Function    : TestSetEmailValidPattern()
@@ -402,6 +403,59 @@ namespace UnitTest
                 isReturnMinusOne = entity.SetPostalCode(reversedPattern);
                 Assert.IsTrue(isReturnMinusOne == -1);
 
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
+
+        [TestMethod]
+        /*
+         * Function    : TestSetDateOfBirthValidInput()
+         * Desctription: Check SetDateOfBirth() sets the customer's date of birth properly if it is a valid input
+         *              -* the SetFristName() should return true *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetDateOfBirthValidInput()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            DateTime validDateOfBirth = new DateTime(2023, 12, 22);
+
+            try
+            {
+                // Test whether the SET method sets the customer's date of birth properly 
+                bool isReturnTrue = entity.SetDateOfBirth(validDateOfBirth);
+                Assert.IsTrue(isReturnTrue);
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
+
+        [TestMethod]
+        /*
+         * Function    : TestSetDateOfBirthInvalidInput()
+         * Desctription: Check SetDateOfBirth() catches invalid input (future date) properly or not
+         *              -* the SetFristName() should return false *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestSetDateOfBirthInvalidInput()
+        {
+            CustomerEntity entity = new CustomerEntity();
+            DateTime currentDate = DateTime.Now;            // The current date
+            DateTime futureDate = currentDate.AddYears(1);  // The date one year after
+
+            try
+            {
+                // Test whether the SET method catches the error when it takes invalid date as an input 
+                bool isReturnFalse = entity.SetDateOfBirth(futureDate);
+                Assert.IsFalse(isReturnFalse);
 
             }
             catch (Exception ex)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -8,6 +9,9 @@ namespace BankDB.Customer
 {
     public class CustomerEntity
     {
+        // The SQL Connection Setting
+        private string connectionString = ConfigurationManager.AppSettings["connectionString"];
+
         /*--------------------------------------------------------------------------------------------------*/
         /***** Fields in custoemr table *********************************************************************/
         /*--------------------------------------------------------------------------------------------------*/
@@ -176,13 +180,20 @@ namespace BankDB.Customer
             return this.DateOfBirth;
         }
 
-        public void SetDateOfBirth(DateTime DateOfBirth)
+        public bool SetDateOfBirth(DateTime dateOfBirth)
         {
+            const bool kSuccess = true, kInvalidDate = false;
+
+            // Check whether the dateOfBirth is future date or not
+            // If so, return false
+            if (dateOfBirth > DateTime.Now)
+            {
+                return kInvalidDate;
+            }
 
             // type casting dateOfBirth to string & parse only the year-month-date part
-            this.DateOfBirth = DateOfBirth.ToString("yyyy-MM-dd");
-
-            /*미래의 날자를 선택하면 error*/
+            this.DateOfBirth = dateOfBirth.ToString("yyyy-MM-dd");
+            return kSuccess;
         }
 
 
