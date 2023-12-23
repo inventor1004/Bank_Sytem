@@ -30,9 +30,6 @@ namespace BankDB.Customer
         /*--------------------------------------------------------------------------------------------------*/
         /***** SET & GET Methods ****************************************************************************/
         /*--------------------------------------------------------------------------------------------------*/
-        internal const bool kSuccess = true;
-        internal const bool kFailure = false;
-
         public uint GetCustomerID() { return this.CustomerID; }
 
         /*
@@ -45,6 +42,7 @@ namespace BankDB.Customer
          */
         public bool SetCustomerID(uint customerID)
         {
+            const bool kSuccess = true, kFailure = false; 
             const int kMaxNum = 2 ^ 32 - 1; // 4294967295
             if (customerID != 0 && customerID < kMaxNum)
             {
@@ -199,6 +197,7 @@ namespace BankDB.Customer
 
         public string GetPostalCode() { return this.PostalCode; }
 
+
         /*
          * Function    : SetPostalCode()
          * Desctription: Set it to PostalCode data member if input has valid Canadian postal code pattern
@@ -234,7 +233,11 @@ namespace BankDB.Customer
         }
 
 
-        public string GetAddress() { return this.Address; }
+        public string GetProvince() { return this.Province; }
+        public int SetProvince(string province)
+        {
+
+        }
 
 
         /*--------------------------------------------------------------------------------------------------*/

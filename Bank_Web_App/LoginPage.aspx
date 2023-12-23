@@ -26,7 +26,7 @@
 
             <div>
                 <a href="ForgetPasswordPage.aspx" id="ForgetPasswordPageLink">Forgot password</a>
-                <a href="SigninPage.aspx" id="SigninPageLink">Create new account</a>
+                <a href="SignupPage.aspx" id="SignupPageLink">Create new account</a>
             </div>
 
         </div>       

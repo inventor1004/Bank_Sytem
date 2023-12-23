@@ -13,5 +13,9 @@ namespace BankWebApp
         {
 
         }
+        protected void btnSignup_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
