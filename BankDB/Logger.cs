@@ -18,7 +18,7 @@ namespace BankDB
         {        
             // Log to the text file
             // Specify the path to the log file
-            string filePath = "../../log/logHistory.txt";
+            string filePath = "../../../BankDB/log/logHistory.txt";
             try
             {
                 // Log to the text file using StreamWriter

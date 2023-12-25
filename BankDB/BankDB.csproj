@@ -95,6 +95,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Customer\CustomerDAL.cs" />
     <Compile Include="Customer\CustomerEntity.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />

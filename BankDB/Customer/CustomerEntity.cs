@@ -11,9 +11,6 @@ namespace BankDB.Customer
 {
     public class CustomerEntity
     {
-        // The SQL Connection Setting
-        private string connectionString = ConfigurationManager.AppSettings["connectionString"];
-
         /*--------------------------------------------------------------------------------------------------*/
         /***** Fields in custoemr table *********************************************************************/
         /*--------------------------------------------------------------------------------------------------*/
@@ -245,13 +242,13 @@ namespace BankDB.Customer
          * Return      : bool  - kSuccess         = true
          *                     - kInvalidProvince = false
          */
-        public bool SetProvince(string province)
+        public bool SetProvince(string province, string dbConenctionSetting)
         {
             const bool kSuccess = true, kInvalidProvince = false;
 
             // Set the conection condition of MYSQL data server
             // & Ready to excute quary command
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            MySqlConnection connection = new MySqlConnection(dbConenctionSetting);
             MySqlCommand command = new MySqlCommand();
             MySqlDataReader reader;
             command.Connection = connection;
@@ -302,13 +299,13 @@ namespace BankDB.Customer
          * Return      : bool  - kSuccess         = true
          *                     - kInvalidProvince = false
          */
-        public bool SetCity(string city)
+        public bool SetCity(string city, string dbConenctionSetting)
         {
             const bool kSuccess = true, kInvalidProvince = false;
 
             // Set the conection condition of MYSQL data server
             // & Ready to excute quary command
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            MySqlConnection connection = new MySqlConnection(dbConenctionSetting);
             MySqlCommand command = new MySqlCommand();
             MySqlDataReader reader;
             command.Connection = connection;

@@ -1,5 +1,4 @@
 ﻿using System;
-using BankDB;
 using System.Configuration;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,7 +9,7 @@ namespace UnitTest
     [TestClass]
     public class CustomerEntityTests
     {
-        private string connectionString = ConfigurationManager.AppSettings["connectionString"];
+        private string connectionString = ConfigurationManager.AppSettings["TestCanadaDBConnection"];
 
         [TestMethod]
         /*
@@ -481,7 +480,7 @@ namespace UnitTest
             try
             {
                 // Test whether the SET method validate input properly and set the input as a data member
-                bool isReturnTrue = entity.SetProvince(validProvince);
+                bool isReturnTrue = entity.SetProvince(validProvince, connectionString);
                 Assert.IsTrue(isReturnTrue);
 
             }
@@ -507,7 +506,7 @@ namespace UnitTest
             try
             {
                 // Test whether the SET method catches the error when it takes not exist province name in Province Table
-                bool isReturnFalse = entity.SetProvince(invalidProvince);
+                bool isReturnFalse = entity.SetProvince(invalidProvince, connectionString);
                 Assert.IsFalse(isReturnFalse);
 
             }
@@ -534,7 +533,7 @@ namespace UnitTest
             try
             {
                 // Test whether the SET method validate input properly and set the input as a data member
-                bool isReturnTrue = entity.SetCity(validCity);
+                bool isReturnTrue = entity.SetCity(validCity, connectionString);
                 Assert.IsTrue(isReturnTrue);
 
             }
@@ -560,7 +559,7 @@ namespace UnitTest
             try
             {
                 // Test whether the SET method catches the error when it takes not exist province name in Province Table
-                bool isReturnFalse = entity.SetCity(invalidCity);
+                bool isReturnFalse = entity.SetCity(invalidCity, connectionString);
                 Assert.IsFalse(isReturnFalse);
 
             }
