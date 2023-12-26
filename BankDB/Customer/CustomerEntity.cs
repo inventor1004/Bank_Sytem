@@ -253,6 +253,10 @@ namespace BankDB.Customer
             MySqlDataReader reader;
             command.Connection = connection;
 
+            if (string.IsNullOrEmpty(province))
+            {
+                return kInvalidProvince;
+            }
 
             // SQL Syntax
             // >> Retrive all the province data from SQL Canda Database
@@ -269,7 +273,7 @@ namespace BankDB.Customer
                 while (reader.Read())
                 {
                     // Check whether the province name is valid or not
-                    if (reader["Province_Name"].ToString() == province)
+                    if (reader["Province_Name"].ToString().ToLower() == province.ToLower())
                     {
                         // When the input province is validated, set the input
                         this.Province = reader["Province_Name"].ToString();
@@ -326,7 +330,7 @@ namespace BankDB.Customer
                 while (reader.Read())
                 {
                     // Check whether the province name is valid or not
-                    if (reader["City_Name"].ToString() == city)
+                    if (reader["City_Name"].ToString().ToLower() == city.ToLower())
                     {
                         // When the input province is validated, set the input
                         this.City = reader["City_Name"].ToString();

@@ -6,7 +6,7 @@ using System.Runtime.Remoting.Messaging;
 
 namespace BankDB.Customer
 {
-    internal class CustomerDAL
+    public class CustomerDAL
     {
         internal MySqlConnection Connection;
         internal MySqlCommand Command;
