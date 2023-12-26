@@ -1,5 +1,0 @@
-An exception occurred: 2023-12-25 6:47:28 PMHost 'Chris-Park.home' is not allowed to connect to this MySQL server
-An exception occurred: 2023-12-25 6:50:19 PMHost 'Chris-Park.home' is not allowed to connect to this MySQL server
-An exception occurred: 2023-12-25 6:50:19 PMHost 'Chris-Park.home' is not allowed to connect to this MySQL server
-An exception occurred: 2023-12-25 6:50:19 PMHost 'Chris-Park.home' is not allowed to connect to this MySQL server
-An exception occurred: 2023-12-25 6:50:19 PMHost 'Chris-Park.home' is not allowed to connect to this MySQL server

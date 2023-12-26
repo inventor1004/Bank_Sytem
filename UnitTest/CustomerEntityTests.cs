@@ -9,7 +9,7 @@ namespace UnitTest
     [TestClass]
     public class CustomerEntityTests
     {
-        private string connectionString = ConfigurationManager.AppSettings["TestCanadaDBConnection"];
+        internal string TestCanadaDBConnection = ConfigurationManager.AppSettings["TestCanadaDBConnection"];
 
         [TestMethod]
         /*
@@ -23,7 +23,7 @@ namespace UnitTest
          */
         public void TestSetEmailValidPattern()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string validEmail = "validPatern@gmail.com";                        // Valid email address 
             string validEmailWithSpecialChar = "validPatern._%+-@gmail.com";    // Valid email address with allowable special characters
 
@@ -56,7 +56,7 @@ namespace UnitTest
          */
         public void TestSetEmailInvalidPattern()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string invalidLocalPart = "Invalid()Patern@gmail.com";
             string missingDomainPart = "InvalidEmailAddressPattern";
             string missingTopLevelDomainPart = "InvalidPatern@gmail";
@@ -96,7 +96,7 @@ namespace UnitTest
          */
         public void TestSetPasswordValidPattern()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string validPassword = "Ab1!@#$%^&*()-_+=";
 
             try
@@ -123,7 +123,7 @@ namespace UnitTest
          */
         public void TestSetPasswordInvalidShorterLength()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string invalidPassword = "Ab1!";
 
             try
@@ -151,7 +151,7 @@ namespace UnitTest
          */
         public void TestSetPasswordInvalidLongerLength()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string invalidPassword = "ABCDEFabcdef123456!@#$%^&*()-_";
 
             try
@@ -181,7 +181,7 @@ namespace UnitTest
          */
         public void TestSetPasswordInvalidMissingCharacter()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string specialCharacterMissed = "ABCDabcd1234";
             string numberMissed           = "ABCDabcd!@#$";
             string lowerCaseMissed        = "ABCD1234!@#$";
@@ -220,7 +220,7 @@ namespace UnitTest
          */
         public void TestSetFirstNameValidInput()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string validFirstName = "Test";
 
             try
@@ -245,7 +245,7 @@ namespace UnitTest
          */
         public void TestSetFirstNameInValidInput()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string invalidFirstName = "012345678901234567890123456789012345678901234567890";
 
             try
@@ -271,7 +271,7 @@ namespace UnitTest
          */
         public void TestSetLastNameValidInput()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string validLastName = "Test";
 
             try
@@ -297,7 +297,7 @@ namespace UnitTest
          */
         public void TestSetLastNameInValidLength()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string invalidLastName = "012345678901234567890123456789012345678901234567890";
 
             try
@@ -322,7 +322,7 @@ namespace UnitTest
          */
         public void TestSetLastNameInValidPattern()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string invalidLastName = "Last Name";
 
             try
@@ -348,7 +348,7 @@ namespace UnitTest
          */
         public void TestSetLPostalCoedValidInputs()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string postalCodeWithoutSpace = "A1A1A1";       // Postal Code without space 
             string postalLowerCaseLetter= "a1a1a1";         // Postal Code with lowercase letters
             string postalCodeWithSpace = "A1A 1A1";         // Postal Code with space 
@@ -384,7 +384,7 @@ namespace UnitTest
          */
         public void TestSetLPostalCoedInvalidInputs()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string lengthIncorrect = "A1A1A1A";    
             string extraSpace      = "a1a 1a1 ";    
             string reversedPattern = "1A1 A1A";       
@@ -420,7 +420,7 @@ namespace UnitTest
          */
         public void TestSetDateOfBirthValidInput()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             DateTime validDateOfBirth = new DateTime(2023, 12, 22);
 
             try
@@ -446,7 +446,7 @@ namespace UnitTest
          */
         public void TestSetDateOfBirthInvalidInput()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             DateTime currentDate = DateTime.Now;            // The current date
             DateTime futureDate = currentDate.AddYears(1);  // The date one year after
 
@@ -474,13 +474,13 @@ namespace UnitTest
          */
         public void TestSetProvinceValidInput()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string validProvince = "Newfoundland and Labrador";
 
             try
             {
                 // Test whether the SET method validate input properly and set the input as a data member
-                bool isReturnTrue = entity.SetProvince(validProvince, connectionString);
+                bool isReturnTrue = entity.SetProvince(validProvince);
                 Assert.IsTrue(isReturnTrue);
 
             }
@@ -500,13 +500,13 @@ namespace UnitTest
          */
         public void TestSetProvinceInvalidInput()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string invalidProvince = "Test";
 
             try
             {
                 // Test whether the SET method catches the error when it takes not exist province name in Province Table
-                bool isReturnFalse = entity.SetProvince(invalidProvince, connectionString);
+                bool isReturnFalse = entity.SetProvince(invalidProvince);
                 Assert.IsFalse(isReturnFalse);
 
             }
@@ -527,13 +527,13 @@ namespace UnitTest
          */
         public void TestSetCityValidInput()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string validCity = "Vanscoy No. 345";
 
             try
             {
                 // Test whether the SET method validate input properly and set the input as a data member
-                bool isReturnTrue = entity.SetCity(validCity, connectionString);
+                bool isReturnTrue = entity.SetCity(validCity);
                 Assert.IsTrue(isReturnTrue);
 
             }
@@ -553,13 +553,13 @@ namespace UnitTest
          */
         public void TestSetCityInvalidInput()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string invalidCity = "Test";
 
             try
             {
                 // Test whether the SET method catches the error when it takes not exist province name in Province Table
-                bool isReturnFalse = entity.SetCity(invalidCity, connectionString);
+                bool isReturnFalse = entity.SetCity(invalidCity);
                 Assert.IsFalse(isReturnFalse);
 
             }
@@ -580,7 +580,7 @@ namespace UnitTest
          */
         public void TestSetPhoneNumberValidInput()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string validNumber = "1234567890";
 
             try
@@ -607,7 +607,7 @@ namespace UnitTest
          */
         public void TestSetPhoneNumberInvalidInput()
         {
-            CustomerEntity entity = new CustomerEntity();
+            CustomerEntity entity = new CustomerEntity(TestCanadaDBConnection);
             string overLengthNumber = "01234567890";
             string notNumber = "test";
 

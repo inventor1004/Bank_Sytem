@@ -8,10 +8,17 @@ namespace BankDB.Customer
 {
     public class CustomerDAL
     {
+        /*--------------------------------------------------------------------------------------------------*/
+        /***** MySQL Connection Settings ********************************************************************/
+        /*--------------------------------------------------------------------------------------------------*/
         internal MySqlConnection Connection;
         internal MySqlCommand Command;
         internal MySqlDataReader Reader;
 
+
+        /*--------------------------------------------------------------------------------------------------*/
+        /***** Constructor **********************************************************************************/
+        /*--------------------------------------------------------------------------------------------------*/
         public CustomerDAL(string connectionString)
         {
             /*
@@ -23,6 +30,11 @@ namespace BankDB.Customer
             this.Command = new MySqlCommand();
             Command.Connection = Connection;
         }
+
+
+        /*--------------------------------------------------------------------------------------------------*/
+        /***** DAL Methods **********************************************************************************/
+        /*--------------------------------------------------------------------------------------------------*/
 
         /*
          * Function	   : public int CreateNewAccount(CustomerEntity ce)
@@ -82,13 +94,14 @@ namespace BankDB.Customer
                 int result = Command.ExecuteNonQuery();
                 if (result != 0)
                 {
+                    SystemMonitor.Log(DateTime.Now.ToString() + ": Customer name" + ce.GetFirstName() + " " + ce.GetLastName() + " creates new account.");
                     return kSuccess;
                 }
 
             }
             catch (Exception ex)
             {
-                Logger.Log(DateTime.Now.ToString() + ex.Message);
+                ErrorLogger.Log(DateTime.Now.ToString() + ex.Message);
             }
             finally
             {

@@ -21,7 +21,7 @@ namespace UnitTest
          */
         public void TestCreateNewAccountValidInput()
         {
-            CustomerEntity customerEntity = new CustomerEntity();
+            CustomerEntity customerEntity = new CustomerEntity(TestCanadaDBConnection);
             DateTime testBirthDate = DateTime.Now;
             customerEntity.SetEmail("TestEmail@gmail.com");
             customerEntity.SetPassword("TestPassword123++");
@@ -29,8 +29,22 @@ namespace UnitTest
             customerEntity.SetLastName("Smith");
             customerEntity.SetDateOfBirth(testBirthDate);
             customerEntity.SetPostalCode("A1A 1A1");
-            customerEntity.SetProvince("Ontario", TestCanadaDBConnection);
+            customerEntity.SetProvince("Ontario");
+            customerEntity.SetCity("Toronto");
+            customerEntity.SetAddress("123ABC St N, Test 111");
+            customerEntity.SetPhoneNumber("0123456789");
 
+            try
+            {
+                CustomerDAL customerDAL = new CustomerDAL(TestBandDBConnection);
+                int isReturnOne = customerDAL.CreateNewAccount(customerEntity);
+                Assert.AreEqual(1, isReturnOne);
+            }
+            catch (Exception ex) 
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+            
 
         }
     }

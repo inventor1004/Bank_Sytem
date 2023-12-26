@@ -11,6 +11,8 @@ namespace BankDB.Customer
 {
     public class CustomerEntity
     {
+        internal string DBConnection;
+
         /*--------------------------------------------------------------------------------------------------*/
         /***** Fields in custoemr table *********************************************************************/
         /*--------------------------------------------------------------------------------------------------*/
@@ -25,6 +27,16 @@ namespace BankDB.Customer
         private string City;
         private string Address;
         private string PhoneNumber;
+
+
+        /*--------------------------------------------------------------------------------------------------*/
+        /***** Constructor **********************************************************************************/
+        /*--------------------------------------------------------------------------------------------------*/
+        public CustomerEntity(string dBConnection)
+        {
+            DBConnection = dBConnection;
+        }
+
 
         /*--------------------------------------------------------------------------------------------------*/
         /***** SET & GET Methods ****************************************************************************/
@@ -242,13 +254,13 @@ namespace BankDB.Customer
          * Return      : bool  - kSuccess         = true
          *                     - kInvalidProvince = false
          */
-        public bool SetProvince(string province, string dbConenctionSetting)
+        public bool SetProvince(string province)
         {
             const bool kSuccess = true, kInvalidProvince = false;
 
             // Set the conection condition of MYSQL data server
             // & Ready to excute quary command
-            MySqlConnection connection = new MySqlConnection(dbConenctionSetting);
+            MySqlConnection connection = new MySqlConnection(DBConnection);
             MySqlCommand command = new MySqlCommand();
             MySqlDataReader reader;
             command.Connection = connection;
@@ -303,13 +315,13 @@ namespace BankDB.Customer
          * Return      : bool  - kSuccess         = true
          *                     - kInvalidProvince = false
          */
-        public bool SetCity(string city, string dbConenctionSetting)
+        public bool SetCity(string city)
         {
             const bool kSuccess = true, kInvalidProvince = false;
 
             // Set the conection condition of MYSQL data server
             // & Ready to excute quary command
-            MySqlConnection connection = new MySqlConnection(dbConenctionSetting);
+            MySqlConnection connection = new MySqlConnection(DBConnection);
             MySqlCommand command = new MySqlCommand();
             MySqlDataReader reader;
             command.Connection = connection;
