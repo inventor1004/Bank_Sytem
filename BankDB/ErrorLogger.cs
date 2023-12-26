@@ -11,14 +11,14 @@ using System.Configuration;
 
 namespace BankDB
 {
-    public static class Logger
+    public static class ErrorLogger
     {
 
         public static void Log(string message)
         {        
             // Log to the text file
             // Specify the path to the log file
-            string filePath = "../../../BankDB/log/logHistory.txt";
+            string filePath = "../../../BankDB/log/errorHistory.txt";
             try
             {
                 // Log to the text file using StreamWriter

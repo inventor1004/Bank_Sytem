@@ -296,7 +296,7 @@ namespace BankDB.Customer
             }
             catch (Exception ex)
             {
-                Logger.Log("An exception occurred: " + DateTime.Now.ToString() + ex.Message);
+                ErrorLogger.Log("An exception occurred: " + DateTime.Now.ToString() + ex.Message);
             }
             finally
             {
@@ -353,7 +353,7 @@ namespace BankDB.Customer
             }
             catch (Exception ex)
             {
-                Logger.Log("An exception occurred: " + DateTime.Now.ToString() + ex.Message);
+                ErrorLogger.Log("An exception occurred: " + DateTime.Now.ToString() + ex.Message);
             }
             finally
             {

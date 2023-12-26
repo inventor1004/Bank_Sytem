@@ -97,7 +97,8 @@
   <ItemGroup>
     <Compile Include="Customer\CustomerDAL.cs" />
     <Compile Include="Customer\CustomerEntity.cs" />
-    <Compile Include="Logger.cs" />
+    <Compile Include="SystemMonitor.cs" />
+    <Compile Include="ErrorLogger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
