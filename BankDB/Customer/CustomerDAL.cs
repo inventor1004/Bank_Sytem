@@ -109,12 +109,9 @@ namespace BankDB.Customer
 
         /*
          * Function	   :
-         * Description :
-         *              
+         * Description :            
          * Parameters  :
-         * Return      :
-         *              
-         *              
+         * Return      :           
          */
         public int GetCustomerIDByEmail(string emailAddress)
         {

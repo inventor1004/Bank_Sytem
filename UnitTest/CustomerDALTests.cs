@@ -141,10 +141,36 @@ namespace UnitTest
 
             try
             {
+                // Pass the valid email address which exists in Customer Table
                 int customerID = customerDAL.GetCustomerIDByEmail("TestEmail@gmail.com");
                 Assert.IsTrue(customerID > 0);
             }
             catch(Exception ex) 
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
+
+
+        [TestMethod]
+        /*
+         * Function    : TestGetCustomerIDByEmailInvalidInput()
+         * Desctription: This test case tests whether GetCustomerIDByEmail() valids the input properly or not.
+         *               -* CreateNewAccount() should return -2 *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestGetCustomerIDByEmailInvalidInput()
+        {
+            CustomerDAL customerDAL = new CustomerDAL(TestBandDBConnection);
+
+            try
+            {
+                // Pass the invalid email address which does not exist in Customer Table
+                int customerID = customerDAL.GetCustomerIDByEmail("Invalid@gmail.com");
+                Assert.IsTrue(customerID == -2);
+            }
+            catch (Exception ex)
             {
                 Assert.Fail($"An exception occurred: {ex.Message}");
             }

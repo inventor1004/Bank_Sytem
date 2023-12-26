@@ -1,2 +1,3 @@
 2023-12-25 8:31:11 PMDuplicate entry 'TestEmail@gmail.com' for key 'customer.Email'
 2023-12-25 10:19:45 PMInvalid attempt to access a field before calling Read()
+2023-12-25 11:07:48 PMInvalid attempt to access a field before calling Read()
