@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Runtime.Remoting.Messaging;
 
 
@@ -15,6 +16,10 @@ namespace BankDB.Customer
         internal MySqlCommand Command;
         internal MySqlDataReader Reader;
 
+        // Properties' size
+        internal const int kEmailMaxSize = 50, kPasswordMaxSize = 255, kFistNameMaxSize = 255, kLastNameMaxSize = 255,
+                           kPostalCodeMaxSize = 7, kProvinceMaxSize = 25, kCityMaxSize = 25, kAddressMaxSize = 255, 
+                           kPhoneNumberMaxSize = 10;
 
         /*--------------------------------------------------------------------------------------------------*/
         /***** Constructor **********************************************************************************/
@@ -38,7 +43,8 @@ namespace BankDB.Customer
 
         /*
          * Function	   : public int CreateNewAccount(CustomerEntity ce)
-         * Description : This method add new colums to the customer table in SQL
+         * Description : This method add a new colum to the customer table in SQL
+         *              All properties should be filled to add the new colum
          * Parameters  : CustomerEntity ce - the object which contains 
          * Return      : int  return 1  : Process succeed 
          *                    return -1 : Null property is found in the CustomerEntity ce
@@ -57,9 +63,7 @@ namespace BankDB.Customer
                 return kNullField;
             }
 
-            // Parameterize the input to avoid SQL injections
-            const int kEmailMaxSize = 50, kPasswordMaxSize = 255, kFistNameMaxSize = 255, kLastNameMaxSize = 255,
-                      kPostalCodeMaxSize = 7, kProvinceMaxSize = 25, kCityMaxSize = 25, kAddressMaxSize = 255, kPhoneNumberMaxSize = 10;
+            // Parameterize the input to avoid SQL injections          
             Command.Parameters.Add("@Email",       MySqlDbType.VarChar, kEmailMaxSize      ).Value = ce.GetEmail();
             Command.Parameters.Add("@Password",    MySqlDbType.VarChar, kPasswordMaxSize   ).Value = ce.GetPassword();
             Command.Parameters.Add("@FirstName",   MySqlDbType.VarChar, kFistNameMaxSize   ).Value = ce.GetFirstName();
@@ -75,16 +79,7 @@ namespace BankDB.Customer
             // SQL Syntax
             // Create the query want to add <Note: parameterized data should be not covered by '' in SQL syntax>
             string sqlCmd = "INSERT INTO Customer (Email, Password, FirstName, LastName, DateOfBirth, PostalCode, Province, City, Address, PhoneNumber)"
-                               + "VALUES(@Email,"
-                                      + "@Password,"
-                                      + "@FirstName,"
-                                      + "@LastName,"
-                                      + "@DateOfBirth,"
-                                      + "@PostalCode,"
-                                      + "@Province,"
-                                      + "@City,"
-                                      + "@Address,"
-                                      + "@PhoneNumber);";
+                               + "VALUES(@Email, @Password, @FirstName, @LastName, @DateOfBirth, @PostalCode, @Province, @City, @Address, @PhoneNumber);";
 
             try
             {
@@ -111,5 +106,64 @@ namespace BankDB.Customer
             return kSQLError;
         }
 
+
+        /*
+         * Function	   :
+         * Description :
+         *              
+         * Parameters  :
+         * Return      :
+         *              
+         *              
+         */
+        public int GetCustomerIDByEmail(string emailAddress)
+        {
+            const int kEmptyString = -1, kSQLError = -2;
+            if(string.IsNullOrEmpty(emailAddress))
+            {
+                return kEmptyString;
+            }
+
+            // check whether the property is already parameterized or not
+            // >> If the parameter already exist, update the value
+            //    If not, create new parameter
+            // Parameterize the Email
+            if (Command.Parameters.Contains("@Email"))
+            {
+                Command.Parameters["@Email"].Value = emailAddress;
+            }
+            else
+            {
+                Command.Parameters.Add("@Email", MySqlDbType.VarChar, kEmailMaxSize).Value = emailAddress;
+            }
+
+            // SQL Syntax
+            // Create the query want to add <Note: parameterized data should be not covered by '' in SQL syntax>
+            string sqlCmd = "SELECT CustomerID FROM Customer WHERE Email = @Email;";
+
+            try
+            {
+                // Retrieve the customerID from the customer table
+                Command.CommandText = sqlCmd;
+                Connection.Open();
+                Reader = Command.ExecuteReader();
+                Reader.Read();
+                if (Reader["CustomerID"] != DBNull.Value)
+                {              
+                    return int.Parse(Reader["CustomerID"].ToString());
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Log(DateTime.Now.ToString() + ex.Message);
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+            return kSQLError;
+        }
     }
 }

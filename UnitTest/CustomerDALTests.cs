@@ -54,9 +54,8 @@ namespace UnitTest
 
         [TestMethod]
         /*
-         * Function    : TestCreateNewAccountValidInput()
-         * Desctription: 
-         *               
+         * Function    : TestCreateNewAccountInvalidInput()
+         * Desctription: This test is a test case to check whether CreateNewAccount() properly performs input validation.
          *               -* CreateNewAccount() should return -1 *-
          * Parameter   : void
          * Return      : void
@@ -84,6 +83,68 @@ namespace UnitTest
                 Assert.AreEqual(-1, isReturnMinusOne);
             }
             catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
+
+        [TestMethod]
+        /*
+         * Function    : TestCreateNewAccountDuplicateEmailAddress()
+         * Desctription: This test is a test case to check whether CreateNewAccount() properly performs input validation.
+         *               -* CreateNewAccount() should return -2 *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestCreateNewAccountDuplicateEmailAddress()
+        {
+            // Does not set the Email property
+            CustomerEntity customerEntity = new CustomerEntity(TestCanadaDBConnection);
+            DateTime testBirthDate = DateTime.Now;
+            customerEntity.SetEmail("TestEmail@gmail.com");
+            customerEntity.SetPassword("TestPassword123++");
+            customerEntity.SetFirstName("Jhone");
+            customerEntity.SetLastName("Smith");
+            customerEntity.SetDateOfBirth(testBirthDate);
+            customerEntity.SetPostalCode("A1A 1A1");
+            customerEntity.SetProvince("Ontario");
+            customerEntity.SetCity("Toronto");
+            customerEntity.SetAddress("123ABC St N, Test 111");
+            customerEntity.SetPhoneNumber("0123456789");
+
+            try
+            {
+                // Pass the cutomer information to the CreateNewAccount() as a parameter
+                CustomerDAL customerDAL = new CustomerDAL(TestBandDBConnection);
+                int isReturnMinusOTwo = customerDAL.CreateNewAccount(customerEntity);
+                Assert.AreEqual(-2, isReturnMinusOTwo);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
+
+
+        [TestMethod]
+        /*
+         * Function    : TestGetCustomerIDByEmailValidInput()
+         * Desctription: This test case tests whether GetCustomerIDByEmail() retrieve the customerID properly
+         *              based on the valid email input.
+         *               -* CreateNewAccount() should return CustomerID(int) *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestGetCustomerIDByEmailValidInput()
+        {
+            CustomerDAL customerDAL = new CustomerDAL(TestBandDBConnection);
+
+            try
+            {
+                int customerID = customerDAL.GetCustomerIDByEmail("TestEmail@gmail.com");
+                Assert.IsTrue(customerID > 0);
+            }
+            catch(Exception ex) 
             {
                 Assert.Fail($"An exception occurred: {ex.Message}");
             }
