@@ -1,3 +1,8 @@
 2023-12-25 8:31:11 PMDuplicate entry 'TestEmail@gmail.com' for key 'customer.Email'
 2023-12-25 10:19:45 PMInvalid attempt to access a field before calling Read()
 2023-12-25 11:07:48 PMInvalid attempt to access a field before calling Read()
+2023-12-27 1:25:22 AMUnable to connect to any of the specified MySQL hosts.
+2023-12-27 1:25:34 AMUnable to connect to any of the specified MySQL hosts.
+2023-12-27 1:28:33 AMUnable to connect to any of the specified MySQL hosts.
+An exception occurred: 2023-12-27 1:45:05 AMTable 'testbankdb.province' doesn't exist
+An exception occurred: 2023-12-27 1:45:55 AMTable 'testbankdb.city' doesn't exist

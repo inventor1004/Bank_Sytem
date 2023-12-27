@@ -10,7 +10,7 @@ namespace UnitTest
     public class CustomerDALTests
     {
         internal string TestCanadaDBConnection = ConfigurationManager.AppSettings["TestCanadaDBConnection"];
-        internal string TestBandDBConnection = ConfigurationManager.AppSettings["TestBankDBConnection"];
+        internal string TestBanKDBConnection = ConfigurationManager.AppSettings["TestBankDBConnection"];
 
 
 
@@ -41,7 +41,7 @@ namespace UnitTest
             try
             {
                 // Pass the cutomer information to the CreateNewAccount() as a parameter
-                CustomerDAL customerDAL = new CustomerDAL(TestBandDBConnection);
+                CustomerDAL customerDAL = new CustomerDAL(TestBanKDBConnection);
                 int isReturnOne = customerDAL.CreateNewAccount(customerEntity);
                 Assert.AreEqual(1, isReturnOne);
             }
@@ -78,7 +78,7 @@ namespace UnitTest
             try
             {
                 // Pass the cutomer information to the CreateNewAccount() as a parameter
-                CustomerDAL customerDAL = new CustomerDAL(TestBandDBConnection);
+                CustomerDAL customerDAL = new CustomerDAL(TestBanKDBConnection);
                 int isReturnMinusOne = customerDAL.CreateNewAccount(customerEntity);
                 Assert.AreEqual(-1, isReturnMinusOne);
             }
@@ -115,7 +115,7 @@ namespace UnitTest
             try
             {
                 // Pass the cutomer information to the CreateNewAccount() as a parameter
-                CustomerDAL customerDAL = new CustomerDAL(TestBandDBConnection);
+                CustomerDAL customerDAL = new CustomerDAL(TestBanKDBConnection);
                 int isReturnMinusOTwo = customerDAL.CreateNewAccount(customerEntity);
                 Assert.AreEqual(-2, isReturnMinusOTwo);
             }
@@ -137,7 +137,7 @@ namespace UnitTest
          */
         public void TestGetCustomerIDByEmailValidInput()
         {
-            CustomerDAL customerDAL = new CustomerDAL(TestBandDBConnection);
+            CustomerDAL customerDAL = new CustomerDAL(TestBanKDBConnection);
 
             try
             {
@@ -162,13 +162,38 @@ namespace UnitTest
          */
         public void TestGetCustomerIDByEmailInvalidInput()
         {
-            CustomerDAL customerDAL = new CustomerDAL(TestBandDBConnection);
+            CustomerDAL customerDAL = new CustomerDAL(TestBanKDBConnection);
 
             try
             {
                 // Pass the invalid email address which does not exist in Customer Table
                 int customerID = customerDAL.GetCustomerIDByEmail("Invalid@gmail.com");
                 Assert.IsTrue(customerID == -2);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"An exception occurred: {ex.Message}");
+            }
+        }
+
+
+        [TestMethod]
+        /*
+         * Function    : 
+         * Desctription: 
+         *               -* CreateNewAccount() should return List of CustomerEntity *-
+         * Parameter   : void
+         * Return      : void
+         */
+        public void TestGetCustomerTableByIdValidInput()
+        {
+            CustomerDAL customerDAL = new CustomerDAL(TestBanKDBConnection);
+
+            try
+            {
+                // Pass the invalid email address which does not exist in Customer Table
+                CustomerEntity customerEntity = customerDAL.GetCustomerTableById(1, TestCanadaDBConnection);
+                Assert.IsTrue(customerEntity != null);
             }
             catch (Exception ex)
             {

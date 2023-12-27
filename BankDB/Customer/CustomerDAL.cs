@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
+using System.Net.Mail;
 using System.Runtime.Remoting.Messaging;
 
 
@@ -108,10 +109,12 @@ namespace BankDB.Customer
 
 
         /*
-         * Function	   :
-         * Description :            
-         * Parameters  :
-         * Return      :           
+         * Function	   : GetCustomerIDByEmail()
+         * Description : Retrieve the CustomerID from the SQL Custoemer table based on the customer's email address           
+         * Parameters  : string emailAddress
+         * Return      : int (customerID): Process success
+         *                   -1: emailAddress is empty
+         *                   -2: SQL error
          */
         public int GetCustomerIDByEmail(string emailAddress)
         {
@@ -161,6 +164,71 @@ namespace BankDB.Customer
             }
 
             return kSQLError;
+        }
+
+
+        /*
+         * Function	   : List<CustomerEntity> GetCustomerTable()
+         * Description : Retrieve all data from the Customer table and return as a List of CustomerEntity
+         * Parameters  : void
+         * Return      : List<CustomerEntity> - Contain all data from the customer table          
+         */
+        public CustomerEntity GetCustomerTableById(int customerID, string connectionSetting)
+        {
+            // check whether the property is already parameterized or not
+            // >> If the parameter already exist, update the value
+            //    If not, create new parameter
+            // Parameterize the Email
+            if (Command.Parameters.Contains("@CustomerID"))
+            {
+                Command.Parameters["@CustomerID"].Value = customerID;
+            }
+            else
+            {
+                Command.Parameters.Add("@CustomerID", MySqlDbType.VarChar).Value = customerID;
+            }
+
+            // SQL Syntax
+            // >> Retrive all data from the customer table
+            string sqlCmd = "SELECT * FROM CUSTOMER WHERE CustomerID = @CustomerID;";
+           
+            try
+            {
+                Command.CommandText = sqlCmd;
+                Connection.Open();
+                Reader = Command.ExecuteReader();
+                Reader.Read();
+                
+                CustomerEntity entity = new CustomerEntity(connectionSetting);
+
+                if (Reader["CustomerID"] != DBNull.Value)
+                {
+                    entity.SetCustomerID(uint.Parse(Reader["CustomerID"].ToString()));
+                    entity.SetEmail(Reader["Email"].ToString());
+                    entity.SetPassword(Reader["Password"].ToString());
+                    entity.SetFirstName(Reader["FirstName"].ToString());
+                    entity.SetLastName(Reader["LastName"].ToString());
+                    entity.SetDateOfBirth(DateTime.Parse(Reader["DateOfBirth"].ToString()));
+                    entity.SetPostalCode(Reader["PostalCode"].ToString());
+                    entity.SetProvince(Reader["Province"].ToString());
+                    entity.SetCity(Reader["City"].ToString());
+                    entity.SetAddress(Reader["Address"].ToString());
+                    entity.SetPhoneNumber(Reader["PhoneNumber"].ToString());
+
+                    return entity;
+                }
+        
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Log(DateTime.Now.ToString() + ex.Message);
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+            return null;
         }
     }
 }

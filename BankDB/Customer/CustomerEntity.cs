@@ -317,7 +317,7 @@ namespace BankDB.Customer
          */
         public bool SetCity(string city)
         {
-            const bool kSuccess = true, kInvalidProvince = false;
+            const bool kSuccess = true, kInvalidCity = false;
 
             // Set the conection condition of MYSQL data server
             // & Ready to excute quary command
@@ -359,7 +359,7 @@ namespace BankDB.Customer
             {
                 connection.Close();
             }
-            return kInvalidProvince;
+            return kInvalidCity;
         }
 
 
