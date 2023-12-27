@@ -222,8 +222,7 @@ namespace BankDB.Customer
                     {
                         return entity;
                     }
-                }
-        
+                }       
             }
             catch (Exception ex)
             {
