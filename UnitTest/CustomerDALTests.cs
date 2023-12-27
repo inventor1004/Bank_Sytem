@@ -179,8 +179,9 @@ namespace UnitTest
 
         [TestMethod]
         /*
-         * Function    : 
-         * Desctription: 
+         * Function    : TestGetCustomerTableByIdValidInput()
+         * Desctription: Test whether the GetCustomerTableById() retrieves the customer infromation properly or not
+         *              when it takes valid CustomerID
          *               -* CreateNewAccount() should return List of CustomerEntity *-
          * Parameter   : void
          * Return      : void

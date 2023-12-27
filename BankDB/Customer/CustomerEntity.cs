@@ -53,7 +53,7 @@ namespace BankDB.Customer
          */
         public bool SetCustomerID(uint customerID)
         {
-            const bool kSuccess = true, kFailure = false; 
+            const bool kSuccess = true, kFailure = false;
             const int kMaxNum = 2 ^ 32 - 1; // 4294967295
             if (customerID != 0 && customerID < kMaxNum)
             {
@@ -124,7 +124,7 @@ namespace BankDB.Customer
                     if (IsValidPassword(password))
                     {
                         // Set the password and return success
-                        this.Password = password;  
+                        this.Password = password;
                         return kSuccess;
                     }
                     else return KInvalidPattern;
@@ -143,16 +143,16 @@ namespace BankDB.Customer
          * Return      : int  - kSuccess     = 1
          *                    - KTooLong     = -1
          */
-        public int SetFirstName(string firstName) 
+        public int SetFirstName(string firstName)
         {
-           const int kSuccess = 1, KTooLong = -1;
-           const int kMinimumLength = 50;
-           if (firstName.Length <= kMinimumLength)
-           {
-               this.FirstName = firstName;
-               return kSuccess;
-           }
-           else { return KTooLong; }
+            const int kSuccess = 1, KTooLong = -1;
+            const int kMinimumLength = 50;
+            if (firstName.Length <= kMinimumLength)
+            {
+                this.FirstName = firstName;
+                return kSuccess;
+            }
+            else { return KTooLong; }
         }
 
 
@@ -222,7 +222,7 @@ namespace BankDB.Customer
             const int kWithoutSpace = 6, kWithSpace = 7;
 
             // Add the sapce if the postal code do not have bank
-            if(postalCode.Length == kWithoutSpace)
+            if (postalCode.Length == kWithoutSpace)
             {
                 // StringBuilder: A class in C# used to perform string manipulation operations.
                 StringBuilder stringBuilder = new StringBuilder(postalCode);
@@ -292,7 +292,7 @@ namespace BankDB.Customer
                         return kSuccess;
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -368,7 +368,7 @@ namespace BankDB.Customer
         {
             const bool kSuccess = true, kInvalidAddress = false;
             const int maxLength = 320;
-            if(address.Length <= maxLength)
+            if (address.Length <= maxLength)
             {
                 this.Address = address;
                 return kSuccess;
@@ -378,13 +378,13 @@ namespace BankDB.Customer
         }
 
         public string GetPhoneNumber() { return this.PhoneNumber; }
-        public bool SetPhoneNumber (string phoneNumber)
+        public bool SetPhoneNumber(string phoneNumber)
         {
             const bool kSuccess = true, kInvalidNumber = false;
-            const int numberLength = 10;
+            const int numberLength = 9;
             if (phoneNumber.Length == numberLength)
             {
-                if(int.TryParse(phoneNumber, out int result))
+                if (int.TryParse(phoneNumber, out int result))
                 {
                     this.PhoneNumber = phoneNumber;
                     return kSuccess;
@@ -428,24 +428,24 @@ namespace BankDB.Customer
              * .{10,}     : Must be a string of at least 10 characters
              * $: Indecates the end of string
              */
-            string patternLowercase   = @"^(?=.*[a-z])";
-            string patternUppercase   = @"^(?=.*[A-Z])";
-            string patternDigit       = @"^(?=.*\d)";
+            string patternLowercase = @"^(?=.*[a-z])";
+            string patternUppercase = @"^(?=.*[A-Z])";
+            string patternDigit = @"^(?=.*\d)";
             string patternSpecialChar = "!@#$%^&*()-_+=";
-            string patternLength      = @"^.{10,}$";
+            string patternLength = @"^.{10,}$";
 
-            
+
             // Make regular expression for each pattern
-            Regex regexLowercase   = new Regex(patternLowercase);
-            Regex regexUppercase   = new Regex(patternUppercase);
-            Regex regexDigit       = new Regex(patternDigit);
-            Regex regexLength      = new Regex(patternLength);
+            Regex regexLowercase = new Regex(patternLowercase);
+            Regex regexUppercase = new Regex(patternUppercase);
+            Regex regexDigit = new Regex(patternDigit);
+            Regex regexLength = new Regex(patternLength);
 
 
             // check each pattern's condition
-            bool hasLowercase   = regexLowercase.IsMatch(Password);
-            bool hasUppercase   = regexUppercase.IsMatch(Password);
-            bool hasDigit       = regexDigit.IsMatch(Password);
+            bool hasLowercase = regexLowercase.IsMatch(Password);
+            bool hasUppercase = regexUppercase.IsMatch(Password);
+            bool hasDigit = regexDigit.IsMatch(Password);
             bool hasSpecialChar = false;
 
             // Check whether the password contains special character or not
@@ -481,6 +481,26 @@ namespace BankDB.Customer
 
             // return the result
             return regexPostalCode.IsMatch(postalCode);
+        }
+
+        public bool AreAllPropertiesSet()
+        {
+            // Store all the properties
+            var properties = this.GetType().GetProperties();
+
+            // check all properties whether they are filled or not
+            foreach (var property in properties)
+            {
+                var value = property.GetValue(this);
+
+                // return false, if some property is empty
+                if (value == null)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

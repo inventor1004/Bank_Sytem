@@ -170,7 +170,7 @@ namespace BankDB.Customer
         /*
          * Function	   : List<CustomerEntity> GetCustomerTable()
          * Description : Retrieve all data from the Customer table and return as a List of CustomerEntity
-         * Parameters  : void
+         * Parameters  : int customerID, string connectionSetting
          * Return      : List<CustomerEntity> - Contain all data from the customer table          
          */
         public CustomerEntity GetCustomerTableById(int customerID, string connectionSetting)
@@ -201,8 +201,10 @@ namespace BankDB.Customer
                 
                 CustomerEntity entity = new CustomerEntity(connectionSetting);
 
+                // If requested ID exists,
                 if (Reader["CustomerID"] != DBNull.Value)
                 {
+                    // Set all the properties
                     entity.SetCustomerID(uint.Parse(Reader["CustomerID"].ToString()));
                     entity.SetEmail(Reader["Email"].ToString());
                     entity.SetPassword(Reader["Password"].ToString());
@@ -215,7 +217,11 @@ namespace BankDB.Customer
                     entity.SetAddress(Reader["Address"].ToString());
                     entity.SetPhoneNumber(Reader["PhoneNumber"].ToString());
 
-                    return entity;
+                    // Check whether all the data members are filled completely
+                    if (entity.AreAllPropertiesSet())
+                    {
+                        return entity;
+                    }
                 }
         
             }
