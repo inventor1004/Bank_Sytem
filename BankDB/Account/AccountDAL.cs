@@ -121,6 +121,61 @@ namespace BankDB.Account
         }
 
         /*
+         * Function	   : DropAccountByAccountID()
+         * Description : Delete an account based on the input AccountID
+         * Parameters  : uint customerID
+         * Return      : bool - kSuccess = true
+         *                    - kFailure = false
+         */
+        public bool DropAccountByAccountID(uint accountID)
+        {
+            const bool kSuccess = true, kFailure = false;
+            if (accountID == 0)
+            {
+                return kFailure;
+            }
+
+            // Check whether the parameter of the CustomerID already exist or not
+            if (Command.Parameters.Contains("AccountID"))
+            {
+                Command.Parameters["AccountID"].Value = accountID;
+            }
+            else
+            {
+                Command.Parameters.Add("AccountID", MySqlDbType.Int64, 7).Value = accountID;
+            }
+
+
+      
+            // SQL Command
+            // >> Create new raws for chequing and savings account
+            string sqlCmd = "DELETE FROM Account WHERE AccountID = @AccountID;";
+
+            try
+            {
+                // Connect to the sql server and excute the command 
+                Command.CommandText = sqlCmd;
+                Connection.Open();
+                int result = Command.ExecuteNonQuery();
+                if (result > 0)
+                {
+                    SystemMonitor.Log(DateTime.Now.ToString() + $": The account of account number {accountID} is deleted.");
+                    return kSuccess;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Log(DateTime.Now.ToString() + ": " + ex.Message);
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+            return kFailure;
+        }
+
+        /*
          * Function	   : GetCurrentBalance()
          * Description : It  takes AccountID as a parameter and return the current balance of the selected account
          * Parameters  : uint accountNumber

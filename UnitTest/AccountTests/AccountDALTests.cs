@@ -23,6 +23,9 @@ namespace UnitTest
             {
                 bool isReturnTrue = accountDAL.CreateNewAccount(customerID);
                 Assert.IsTrue(isReturnTrue);
+                accountDAL.DropAccountByAccountID(1);
+                accountDAL.DropAccountByAccountID(2);
+
             }
             catch (Exception ex)
             {
