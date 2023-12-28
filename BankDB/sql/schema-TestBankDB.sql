@@ -23,7 +23,7 @@ CREATE TABLE Account (
     AccountNumber INT(7) UNSIGNED NOT NULL UNIQUE,
     CustomerID INT UNSIGNED,
     Balance DECIMAL(10, 2),
-    AccountType ENUM('chequing', 'saving'),
+    AccountType ENUM('chequing', 'savings'),
     FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
 );
 

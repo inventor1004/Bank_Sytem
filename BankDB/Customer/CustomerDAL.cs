@@ -97,7 +97,7 @@ namespace BankDB.Customer
             }
             catch (Exception ex)
             {
-                ErrorLogger.Log(DateTime.Now.ToString() + ex.Message);
+                ErrorLogger.Log(DateTime.Now.ToString() + ": " + ex.Message);
             }
             finally
             {
@@ -156,7 +156,7 @@ namespace BankDB.Customer
             }
             catch (Exception ex)
             {
-                ErrorLogger.Log(DateTime.Now.ToString() + ex.Message);
+                ErrorLogger.Log(DateTime.Now.ToString() + ": " + ex.Message);
             }
             finally
             {
@@ -226,7 +226,7 @@ namespace BankDB.Customer
             }
             catch (Exception ex)
             {
-                ErrorLogger.Log(DateTime.Now.ToString() + ex.Message);
+                ErrorLogger.Log(DateTime.Now.ToString() + ": " + ex.Message);
             }
             finally
             {

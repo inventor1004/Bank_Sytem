@@ -95,6 +95,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\AccountDAL.cs" />
+    <Compile Include="Account\AccountEntity.cs" />
     <Compile Include="Customer\CustomerDAL.cs" />
     <Compile Include="Customer\CustomerEntity.cs" />
     <Compile Include="SystemMonitor.cs" />

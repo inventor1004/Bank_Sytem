@@ -103,9 +103,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomerEntityTests.cs" />
+    <Compile Include="CustomerTests\CustomerEntityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CustomerDALTests.cs" />
+    <Compile Include="CustomerTests\CustomerDALTests.cs" />
+    <Compile Include="AccountTests\AccountDALTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

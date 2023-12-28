@@ -381,7 +381,7 @@ namespace BankDB.Customer
         public bool SetPhoneNumber(string phoneNumber)
         {
             const bool kSuccess = true, kInvalidNumber = false;
-            const int numberLength = 9;
+            const int numberLength = 10;
             if (phoneNumber.Length == numberLength)
             {
                 if (int.TryParse(phoneNumber, out int result))
