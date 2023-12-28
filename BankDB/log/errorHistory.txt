@@ -17,3 +17,4 @@ An exception occurred: 2023-12-27 1:45:55 AMTable 'testbankdb.city' doesn't exis
 2023-12-27 9:38:16 PM: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(2000001 , 1, 0, 'savings')' at line 1
 2023-12-27 9:39:31 PM: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(2000001 , 1, 0.0, 'savings')' at line 1
 2023-12-27 9:40:36 PM: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VALUES(2000001 , 1, 0.0, 'savings')' at line 1
+2023-12-28 2:28:31 PM: Invalid attempt to access a field before calling Read()
