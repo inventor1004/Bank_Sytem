@@ -27,3 +27,6 @@ An exception occurred: 2023-12-27 1:45:55 AMTable 'testbankdb.city' doesn't exis
 2023-12-28 3:50:01 PM: Duplicate entry 'TestEmail@gmail.com' for key 'customer.Email'
 2023-12-28 3:50:01 PM: Invalid attempt to access a field before calling Read()
 2023-12-28 3:59:34 PM: Duplicate entry '1000001' for key 'account.AccountNumber'
+2023-12-28 4:21:07 PM: Duplicate entry '1000001' for key 'account.AccountNumber'
+2023-12-28 4:21:41 PM: Duplicate entry '1000001' for key 'account.AccountNumber'
+2023-12-28 4:34:26 PM: Duplicate entry 'TestEmail@gmail.com' for key 'customer.Email'

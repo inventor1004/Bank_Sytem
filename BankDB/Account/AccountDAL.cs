@@ -159,7 +159,63 @@ namespace BankDB.Account
                 int result = Command.ExecuteNonQuery();
                 if (result > 0)
                 {
-                    SystemMonitor.Log(DateTime.Now.ToString() + $": The account of account number {accountID} is deleted.");
+                    SystemMonitor.Log(DateTime.Now.ToString() + $": The account of account ID {accountID} is deleted.");
+                    return kSuccess;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Log(DateTime.Now.ToString() + ": " + ex.Message);
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+            return kFailure;
+        }
+
+
+        /*
+         * Function	   : DropAccountByAccountID()
+         * Description : Delete an account based on the input AccountID
+         * Parameters  : uint customerID
+         * Return      : bool - kSuccess = true
+         *                    - kFailure = false
+         */
+        public bool DropAccountByCustomerID(uint customerID)
+        {
+            const bool kSuccess = true, kFailure = false;
+            if (customerID == 0)
+            {
+                return kFailure;
+            }
+
+            // Check whether the parameter of the CustomerID already exist or not
+            if (Command.Parameters.Contains("CustomerID"))
+            {
+                Command.Parameters["CustomerID"].Value = customerID;
+            }
+            else
+            {
+                Command.Parameters.Add("CustomerID", MySqlDbType.Int64, 7).Value = customerID;
+            }
+
+
+
+            // SQL Command
+            // >> Create new raws for chequing and savings account
+            string sqlCmd = "DELETE FROM Account WHERE CustomerID = @CustomerID;";
+
+            try
+            {
+                // Connect to the sql server and excute the command 
+                Command.CommandText = sqlCmd;
+                Connection.Open();
+                int result = Command.ExecuteNonQuery();
+                if (result > 0)
+                {
+                    SystemMonitor.Log(DateTime.Now.ToString() + $": The accounts of customerID = {customerID} are deleted.");
                     return kSuccess;
                 }
             }

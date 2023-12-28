@@ -107,6 +107,61 @@ namespace BankDB.Customer
             return kSQLError;
         }
 
+        /*
+        * Function	   : DropCustomerByEmail()
+        * Description : Delete an account based on the input AccountID
+        * Parameters  : uint customerID
+        * Return      : bool - kSuccess = true
+        *                    - kFailure = false
+        */
+        public bool DropCustomerByEmail(string email)
+        {
+            const bool kSuccess = true, kFailure = false;
+            if (string.IsNullOrEmpty(email))
+            {
+                return kFailure;
+            }
+
+            // Check whether the parameter of the CustomerID already exist or not
+            if (Command.Parameters.Contains("@Email"))
+            {
+                Command.Parameters["@Email"].Value = email;
+            }
+            else
+            {
+                Command.Parameters.Add("@Email", MySqlDbType.VarChar, kEmailMaxSize).Value = email;
+            }
+
+
+
+            // SQL Command
+            // >> Create new raws for chequing and savings account
+            string sqlCmd = "DELETE FROM Customer WHERE Email = @Email;";
+
+            try
+            {
+                // Connect to the sql server and excute the command 
+                Command.CommandText = sqlCmd;
+                Connection.Open();
+                int result = Command.ExecuteNonQuery();
+                if (result > 0)
+                {
+                    SystemMonitor.Log(DateTime.Now.ToString() + $": The customer account of email address {email} is deleted.");
+                    return kSuccess;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Log(DateTime.Now.ToString() + ": " + ex.Message);
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+            return kFailure;
+        }
+
 
         /*
          * Function	   : GetCustomerIDByEmail()
