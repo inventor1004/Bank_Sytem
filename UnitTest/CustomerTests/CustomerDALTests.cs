@@ -44,7 +44,6 @@ namespace UnitTest
                 CustomerDAL customerDAL = new CustomerDAL(TestBanKDBConnection);
                 int isReturnOne = customerDAL.CreateNewAccount(customerEntity);
                 Assert.AreEqual(1, isReturnOne);
-                customerDAL.DropCustomerByEmail("TestEmail@gmail.com");
             }
             catch (Exception ex) 
             {

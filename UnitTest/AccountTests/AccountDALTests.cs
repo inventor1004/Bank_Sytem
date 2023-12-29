@@ -25,7 +25,6 @@ namespace UnitTest
                 bool isReturnTrue = accountDAL.CreateNewAccount(customerID);
                 Assert.IsTrue(isReturnTrue);
                 // Drop the accounts which are created for test
-                accountDAL.DropAccountByCustomerID(1);
 
             }
             catch (Exception ex)
