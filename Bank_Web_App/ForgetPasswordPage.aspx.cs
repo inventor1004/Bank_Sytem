@@ -27,5 +27,10 @@ namespace BankWebApp
             }
             EmailInvalidErrorMessage.Visible = true;
         }
+
+        protected void HomeBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/LoginPage.aspx", true);
+        }
     }
 }

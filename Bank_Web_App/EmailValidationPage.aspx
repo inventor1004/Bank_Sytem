@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <link rel="StyleSheet" href="./css/EmailValidaionPageStyle.css"/>
+    <link rel="StyleSheet" href="./css/EmailValidationPageStyle.css"/>
     <script>
         var minutes = 5;
         var seconds = 0;
@@ -36,12 +36,29 @@
 </head>
 <body>
     <form id="EmailValidaionPage" runat="server">
-        <div id="FramWork">
+        <asp:ImageButton ID="HomeBtn" runat="server" ImageUrl="./css/homeButton.png" OnClick="HomeBtn_Click" />
+        <div id="Framework">
             <img id="LogoImage" src="./css/Logo.png"/>
-            <div id="ValidationCodeInput">
-                <h2>A validation code has been sent to your email</h2>
-                <asp:TextBox runat="server" id="ValidationCode" placeholder="Enter your email address"></asp:TextBox>
-                <asp:Button runat="server" ID="CodeSubmitBtn" Text="submit" />
+            <div id="ValidationCodeArea">                
+                <div id="ValidationInstruction">
+                    <h>Validation Code</h>
+                </div>
+                
+                <asp:TextBox runat="server" id="ValidationCodeInput" placeholder="Enter your validation code"></asp:TextBox>
+                <div>
+                    <asp:Label ID="ValidationInstructionMessage" runat="server" 
+                               Text ="A validation code has been sent to your email"
+                               Visible="true" style="font-size: 20px"></asp:Label>
+                    <asp:Label ID="CodeInvalidErrorMessage" runat="server" 
+                               Text ="Invalid length of code. Please check your code again"
+                               Visible="false" style="font-size:20px" ForeColor="red"></asp:Label>  
+                </div>                              
+                <div>
+                    <asp:Button runat="server" ID="CodeSubmitBtn" Text="submit" OnClick="CodeSubmitBtn_Click"/>
+                </div>
+                <div>
+                    <asp:Button runat="server" ID="CodeResendBtn" Text="Resend" />
+                </div>          
                 <div id="timer" runat="server"></div>
             </div>
         </div>

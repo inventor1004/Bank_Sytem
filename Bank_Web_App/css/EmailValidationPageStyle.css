@@ -7,6 +7,13 @@ html {
 /*-----------------------------------------------------------------------------------------*/
 /*---- Body Style -------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------*/
+#HomeBtn {
+  width: 75px;
+  height: auto;
+  margin-top: 10px;;
+  margin-left: 10px;
+}
+
 #Framework {
   margin-left: 15rem;
   margin-right: 15rem;
@@ -17,4 +24,43 @@ html {
   margin-top: 100px;
   width: 600px;
   height: auto;
+}
+
+#ValidationInstruction {
+  font-size: 30px;
+  font-weight:bold;
+}
+
+#ValidationCodeInput {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 540px;
+  height: 45px;
+
+  padding: 3px;
+  font-size: 23px;
+}
+
+#CodeSubmitBtn, #CodeResendBtn{
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: 550px;
+  height: 45px;
+  border-radius: 10px;
+  font-size: 23px;
+
+  background-color: #3498db;
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+}
+
+#CodeSubmitBtn:hover, #CodeResendBtn:hover {
+  background-color: black;
+}
+
+#timer {
+  font-size: 20px;
 }

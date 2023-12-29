@@ -74,6 +74,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BankSystem.cs" />
     <Compile Include="EmailValidationPage.aspx.cs">
       <DependentUpon>EmailValidationPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

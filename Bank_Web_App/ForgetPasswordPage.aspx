@@ -9,6 +9,7 @@
 </head>
 <body>
     <form id="ForGetPassword" runat="server">
+    <asp:ImageButton ID="HomeBtn" runat="server" ImageUrl="./css/homeButton.png" OnClick="HomeBtn_Click" />
         <div id="Framework">
             <img id="LogoImage" src="./css/Logo.png"/>
 

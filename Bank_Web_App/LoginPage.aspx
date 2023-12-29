@@ -10,6 +10,7 @@
 </head>
 <body>
     <form id="MainPageForm" runat="server">
+        <asp:ImageButton ID="HomeBtn" runat="server" ImageUrl="./css/homeButton.png" OnClick="HomeBtn_Click" />
         <div id="LoginFramework">
             <img id="LogoImage" src="./css/Logo.png"/>
 
