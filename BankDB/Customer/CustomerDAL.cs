@@ -290,5 +290,58 @@ namespace BankDB.Customer
 
             return null;
         }
+
+
+        /*
+         * Function	   : IsEmailExist()
+         * Description : Check whether the input email exist in the database or not
+         * Parameters  : string email
+         * Return      : bool kSuccess = true
+         *                    kFailure = false
+         */
+        public bool IsEmailExist(string email)
+        {
+            const bool kSuccess = true, kFailure = false;
+            if(string.IsNullOrEmpty(email))
+            {
+                return kFailure;
+            }
+
+            // Parameterize email input before the SQL conneciton
+            if(Command.Parameters.Contains("@Email"))
+            {
+                Command.Parameters["@Email"].Value = email;            
+            }
+            else
+            {
+                Command.Parameters.Add("@Email", MySqlDbType.VarChar, kEmailMaxSize).Value = email;
+            }
+
+            // SQL command
+            // >> Retrieve email address if requested email exists
+            string sqlCmd = "SELECT Email FROM Customer WHERE Email = @Email;";
+
+            try
+            {
+                Command.CommandText = sqlCmd;
+                Connection.Open();
+                Reader = Command.ExecuteReader();
+                Reader.Read();
+                if (Reader["Email"] != DBNull.Value)
+                {
+                    return kSuccess;
+                }
+            }
+            catch(Exception ex)
+            {
+                ErrorLogger.Log(DateTime.Now.ToString() + ": " + ex.Message.ToString());
+            }
+            finally
+            {
+                Connection.Close(); 
+            }
+
+            return kFailure;
+        }
     }
 }

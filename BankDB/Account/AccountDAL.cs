@@ -58,13 +58,13 @@ namespace BankDB.Account
             }
 
             // Check whether the parameter of the CustomerID already exist or not
-            if(Command.Parameters.Contains("CustomerID"))
+            if(Command.Parameters.Contains("@CustomerID"))
             {
-                Command.Parameters["CustomerID"].Value = customerID;
+                Command.Parameters["@CustomerID"].Value = customerID;
             }
             else
             {
-                Command.Parameters.Add("CustomerID", MySqlDbType.Int64).Value = customerID;
+                Command.Parameters.Add("@CustomerID", MySqlDbType.Int64).Value = customerID;
             }
 
             // Chequing Account Number starts with 1
@@ -73,22 +73,22 @@ namespace BankDB.Account
             uint chequingAccountNumber = 1000000 + customerID;
             uint savingsAccountNumber  = 2000000 + customerID;
             
-            if (Command.Parameters.Contains("ChequingAccountNumber"))
+            if (Command.Parameters.Contains("@ChequingAccountNumber"))
             {
-                Command.Parameters["ChequingAccountNumber"].Value = chequingAccountNumber;
+                Command.Parameters["@ChequingAccountNumber"].Value = chequingAccountNumber;
             }
             else
             {
-                Command.Parameters.Add("ChequingAccountNumber", MySqlDbType.Int64, 7).Value = chequingAccountNumber;
+                Command.Parameters.Add("@ChequingAccountNumber", MySqlDbType.Int64, 7).Value = chequingAccountNumber;
             }
 
-            if (Command.Parameters.Contains("SavingsAccountNumber"))
+            if (Command.Parameters.Contains("@SavingsAccountNumber"))
             {
-                Command.Parameters["SavingsAccountNumber"].Value = savingsAccountNumber;
+                Command.Parameters["@SavingsAccountNumber"].Value = savingsAccountNumber;
             }
             else
             {
-                Command.Parameters.Add("SavingsAccountNumber", MySqlDbType.Int64, 7).Value = savingsAccountNumber;
+                Command.Parameters.Add("@SavingsAccountNumber", MySqlDbType.Int64, 7).Value = savingsAccountNumber;
             }
 
             // SQL Command
@@ -136,13 +136,13 @@ namespace BankDB.Account
             }
 
             // Check whether the parameter of the CustomerID already exist or not
-            if (Command.Parameters.Contains("AccountID"))
+            if (Command.Parameters.Contains("@AccountID"))
             {
-                Command.Parameters["AccountID"].Value = accountID;
+                Command.Parameters["@AccountID"].Value = accountID;
             }
             else
             {
-                Command.Parameters.Add("AccountID", MySqlDbType.Int64, 7).Value = accountID;
+                Command.Parameters.Add("@AccountID", MySqlDbType.Int64, 7).Value = accountID;
             }
 
 
@@ -192,13 +192,13 @@ namespace BankDB.Account
             }
 
             // Check whether the parameter of the CustomerID already exist or not
-            if (Command.Parameters.Contains("CustomerID"))
+            if (Command.Parameters.Contains("@CustomerID"))
             {
-                Command.Parameters["CustomerID"].Value = customerID;
+                Command.Parameters["@CustomerID"].Value = customerID;
             }
             else
             {
-                Command.Parameters.Add("CustomerID", MySqlDbType.Int64, 7).Value = customerID;
+                Command.Parameters.Add("@CustomerID", MySqlDbType.Int64, 7).Value = customerID;
             }
 
 
@@ -248,13 +248,13 @@ namespace BankDB.Account
             }
 
             // Check whether the parameter of the AccountNumber already exist or not
-            if (Command.Parameters.Contains("AccountNumber"))
+            if (Command.Parameters.Contains("@AccountNumber"))
             {
-                Command.Parameters["AccountNumber"].Value = accountNumber;
+                Command.Parameters["@AccountNumber"].Value = accountNumber;
             }
             else
             {
-                Command.Parameters.Add("AccountNumber", MySqlDbType.Double).Value = accountNumber;
+                Command.Parameters.Add("@AccountNumber", MySqlDbType.Double).Value = accountNumber;
             }
 
             // SQL Command

@@ -24,13 +24,22 @@ namespace BankWebApp
         protected global::System.Web.UI.HtmlControls.HtmlForm ForGetPassword;
 
         /// <summary>
-        /// Email control.
+        /// EmailInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Email;
+        protected global::System.Web.UI.WebControls.TextBox EmailInput;
+
+        /// <summary>
+        /// EmailInvalidErrorMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label EmailInvalidErrorMessage;
 
         /// <summary>
         /// EmailSubmitBtn control.
@@ -40,32 +49,5 @@ namespace BankWebApp
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button EmailSubmitBtn;
-
-        /// <summary>
-        /// ValidationCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ValidationCode;
-
-        /// <summary>
-        /// CodeSubmitBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button CodeSubmitBtn;
-
-        /// <summary>
-        /// timer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl timer;
     }
 }

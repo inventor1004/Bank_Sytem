@@ -50,9 +50,9 @@ CREATE TABLE `Admin` (
 
 INSERT INTO `Admin` (Username, Password, Name) VALUES (123456, '123456', 'AdminName');
 
-INSERT INTO Customer (Email, Password, FirstName, LastName, DateOfBirth, PostalCode, Address, PhoneNumber)
+INSERT INTO Customer (Email, Password, FirstName, LastName, DateOfBirth, PostalCode, Province, City, Address, PhoneNumber)
 VALUES
-    ('TestEmail@gmail.com', 'password1', 'John', 'Doe', '1990-05-15', 'A1B 2C3', '123 Main St, Cityville' ,'+1234567890');
+    ('TestEmail@gmail.com', 'password1', 'John', 'Doe', '1990-05-15', 'A1B 2C3', 'Ontario', 'Waterloo', '123 Main St, Cityville' , 1234567890);
 
 INSERT INTO `Account` (AccountNumber, CustomerID, Balance, AccountType)
 VALUES

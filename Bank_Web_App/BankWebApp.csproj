@@ -67,12 +67,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EmailValidationPage.aspx" />
     <Content Include="ForgetPasswordPage.aspx" />
     <Content Include="LoginPage.aspx" />
     <Content Include="SignupPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmailValidationPage.aspx.cs">
+      <DependentUpon>EmailValidationPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmailValidationPage.aspx.designer.cs">
+      <DependentUpon>EmailValidationPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ForgetPasswordPage.aspx.cs">
       <DependentUpon>ForgetPasswordPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -104,6 +112,12 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BankDB\BankDB.csproj">
+      <Project>{30cb6164-626b-4780-b93c-2f523f812131}</Project>
+      <Name>BankDB</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
