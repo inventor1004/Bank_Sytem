@@ -21,16 +21,20 @@ namespace BankWebApp
         protected void EmailSubmitBtn_Click(object sender, EventArgs e)
         {
             string inputEmail = EmailInput.Text;
-            if(CustomerDAL.IsEmailExist(inputEmail))
+
+            // Check whether the input email exists in the customer database
+            // If the email is found in the database, move to the EmailValidationPage with the customer email info
+            if (CustomerDAL.IsEmailExist(inputEmail))
             {
-                Response.Redirect("/EmailValidationPage.aspx", true);
+                Session["Email"] = inputEmail;
+                Response.Redirect("./EmailValidationPage.aspx", true);
             }
             EmailInvalidErrorMessage.Visible = true;
         }
 
         protected void HomeBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/LoginPage.aspx", true);
+            Response.Redirect("../LoginPage.aspx", true);
         }
     }
 }

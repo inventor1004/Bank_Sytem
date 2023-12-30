@@ -67,27 +67,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EmailValidationPage.aspx" />
-    <Content Include="ForgetPasswordPage.aspx" />
+    <Content Include="ForgetPasswordPages\EmailValidationPage.aspx" />
+    <Content Include="ForgetPasswordPages\ForgetPasswordPage.aspx" />
+    <Content Include="ForgetPasswordPages\ChangePasswordPage.aspx" />
     <Content Include="LoginPage.aspx" />
     <Content Include="SignupPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BankSystem.cs" />
-    <Compile Include="EmailValidationPage.aspx.cs">
+    <Compile Include="ForgetPasswordPages\EmailValidationPage.aspx.cs">
       <DependentUpon>EmailValidationPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="EmailValidationPage.aspx.designer.cs">
+    <Compile Include="ForgetPasswordPages\EmailValidationPage.aspx.designer.cs">
       <DependentUpon>EmailValidationPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ForgetPasswordPage.aspx.cs">
+    <Compile Include="ForgetPasswordPages\ForgetPasswordPage.aspx.cs">
       <DependentUpon>ForgetPasswordPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ForgetPasswordPage.aspx.designer.cs">
+    <Compile Include="ForgetPasswordPages\ForgetPasswordPage.aspx.designer.cs">
       <DependentUpon>ForgetPasswordPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForgetPasswordPages\ChangePasswordPage.aspx.cs">
+      <DependentUpon>ChangePasswordPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgetPasswordPages\ChangePasswordPage.aspx.designer.cs">
+      <DependentUpon>ChangePasswordPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="LoginPage.aspx.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>

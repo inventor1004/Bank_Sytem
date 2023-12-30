@@ -26,7 +26,7 @@
             <asp:Button runat="server" ID="LoginButton" text="Login" OnClick="LoginButton_Click"/>
 
             <div>
-                <a href="ForgetPasswordPage.aspx" id="ForgetPasswordPageLink">Forgot password</a>
+                <a href="ForgetPasswordPages/ForgetPasswordPage.aspx" id="ForgetPasswordPageLink">Forgot password</a>
                 <a href="SignupPage.aspx" id="SignupPageLink">Create new account</a>
             </div>
 
