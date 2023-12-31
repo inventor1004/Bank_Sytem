@@ -66,7 +66,17 @@ namespace BankWebApp.ForgetPasswordPages
                 return;
             }
 
-            int result;
+            // If a customer entered valid new password and it updated successfully,
+            // >> 1. Lead the customer to ChangeSuccessPage
+            // >> 2. If not show the error message
+            if (DAL.ChangePW(Entity.GetCustomerID(), newPW))
+            {
+                Response.Redirect("./ChangeSuccessPage.aspx", true);
+            }
+            else
+            {
+                PWPatternErrorMessage.Visible = true;
+            }
         }
 
         /*--------------------------------------------------------------------------------------------------*/
@@ -76,6 +86,7 @@ namespace BankWebApp.ForgetPasswordPages
         {
             PWDuplicateErrorMessage.Visible = false;
             ReenteredPWErrorMessage.Visible = false;
+            PWPatternErrorMessage.Visible = false;
         }
     }
 }

@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <link rel="StyleSheet" href="../css/ChangePasswordPageStyle.css"/>
-    <title></title>
+    <title>ChangePasswordPage</title>
 </head>
 <body>
     <form id="ChangePasswordPage" runat="server">
@@ -15,15 +15,19 @@
 
            <div>                
                <div id="NewPasswordInstruction">
-                  <h>New Password</h>
-                  <div>
-                  <asp:TextBox runat="server" id="NewPW" placeholder="Enter your new password"></asp:TextBox>
-                      <asp:Label ID="PWPatternErrorMessage" runat="server" 
-                           Text ="Password should be inclueded at least one uppercase letter, lowercase letter, number, and special character"
-                           Visible = "false" style="font-size:20px" ForeColor="red"></asp:Label>
-                      <asp:Label ID="PWDuplicateErrorMessage" runat="server" 
-                           Text = "Password should be inclueded at least one uppercase letter, lowercase letter, number, and special character"
-                           Visible = "false" style="font-size:20px" ForeColor="red"></asp:Label>
+                <h>New Password</h>
+                <div>
+                <asp:TextBox runat="server" id="NewPW" placeholder="Enter your new password"></asp:TextBox>
+                <div>
+                    <asp:Label ID="PWPatternErrorMessage" runat="server" 
+                    Text ="Password should be inclueded at least one uppercase letter, lowercase letter, number, and special character"
+                    Visible = "false" style="font-size:20px" ForeColor="red"></asp:Label>
+                </div>
+                <div>
+                    <asp:Label ID="PWDuplicateErrorMessage" runat="server" 
+                     Text = "Password should be inclueded at least one uppercase letter, lowercase letter, number, and special character"
+                     Visible = "false" style="font-size:20px" ForeColor="red"></asp:Label>
+                </div>
                   </div>
                </div>       
                

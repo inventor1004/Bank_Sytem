@@ -343,5 +343,68 @@ namespace BankDB.Customer
 
             return kFailure;
         }
+
+
+        /*
+         * Function	   : ChangePW()
+         * Description : Update the customer's password in the customer table
+         * Parameters  : uint customerID, string PW
+         * Return      : bool kSuccess = true
+         *                    kFailure = false
+         *              
+         */
+        public bool ChangePW(uint customerID, string PW)
+        {
+            bool kSuccess = true, kFailure = false;   
+            if(string.IsNullOrEmpty(PW))
+            {
+                return kFailure;
+            }
+
+            // Parameterize PW input before the SQL conneciton
+            if (Command.Parameters.Contains("@Password"))
+            {
+                Command.Parameters["@Password"].Value = PW;
+            }
+            else
+            {
+                Command.Parameters.Add("@Password", MySqlDbType.VarChar, kEmailMaxSize).Value = PW;
+            }
+
+            if (Command.Parameters.Contains("@CustomerID"))
+            {
+                Command.Parameters["@CustomerID"].Value = customerID;
+            }
+            else
+            {
+                Command.Parameters.Add("@CustomerID", MySqlDbType.VarChar, kEmailMaxSize).Value = customerID;
+            }
+
+            // SQL command
+            // >> Update the password
+            string sqlCmd = "UPDATE Customer SET Password = @Password WHERE CustomerID = @CustomerID;";
+
+
+            try
+            {
+                Command.CommandText = sqlCmd;
+                Connection.Open();
+                int result = Command.ExecuteNonQuery();
+                if (result > 0)
+                {
+                    return kSuccess;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Log(DateTime.Now.ToString() + ": " + ex.Message.ToString());
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+            return kFailure;
+        }
     }
 }

@@ -1,0 +1,50 @@
+html {
+  margin: 0px;
+  background-color: white;
+}
+
+
+/*-----------------------------------------------------------------------------------------*/
+/*---- Body Style -------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
+#HomeBtn {
+  width: 75px;
+  height: auto;
+  margin-top: 10px;;
+  margin-left: 10px;
+}
+
+#Framework {
+  margin-left: 15rem;
+  margin-right: 15rem;
+  text-align: center;
+}
+
+#PWChangeInstructions{
+  font-size: 45px;
+  font-weight:bold;
+}
+
+#GoToLoginPageInstructions {
+  font-size: 30px;
+}
+
+#ToLoginPageBtn {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: 550px;
+  height: 45px;
+  border-radius: 10px;
+  font-size: 23px;
+
+  background-color: #3498db;
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+}
+
+#SubmitBtn:hover {
+  background-color: black;
+}

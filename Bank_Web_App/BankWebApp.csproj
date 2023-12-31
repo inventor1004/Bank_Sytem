@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ForgetPasswordPages\ChangeSuccessPage.aspx" />
     <Content Include="ForgetPasswordPages\EmailValidationPage.aspx" />
     <Content Include="ForgetPasswordPages\ForgetPasswordPage.aspx" />
     <Content Include="ForgetPasswordPages\ChangePasswordPage.aspx" />
@@ -76,6 +77,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BankSystem.cs" />
+    <Compile Include="ForgetPasswordPages\ChangeSuccessPage.aspx.cs">
+      <DependentUpon>ChangeSuccessPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgetPasswordPages\ChangeSuccessPage.aspx.designer.cs">
+      <DependentUpon>ChangeSuccessPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ForgetPasswordPages\EmailValidationPage.aspx.cs">
       <DependentUpon>EmailValidationPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
