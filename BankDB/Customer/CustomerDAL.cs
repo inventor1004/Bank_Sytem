@@ -171,12 +171,12 @@ namespace BankDB.Customer
          *                   -1: emailAddress is empty
          *                   -2: SQL error
          */
-        public int GetCustomerIDByEmail(string emailAddress)
+        public uint GetCustomerIDByEmail(string emailAddress)
         {
-            const int kEmptyString = -1, kSQLError = -2;
+            const int kFailure = 0;
             if(string.IsNullOrEmpty(emailAddress))
             {
-                return kEmptyString;
+                return kFailure;
             }
 
             // check whether the property is already parameterized or not
@@ -205,7 +205,7 @@ namespace BankDB.Customer
                 Reader.Read();
                 if (Reader["CustomerID"] != DBNull.Value)
                 {              
-                    return int.Parse(Reader["CustomerID"].ToString());
+                    return uint.Parse(Reader["CustomerID"].ToString());
                 }
 
             }
@@ -218,7 +218,7 @@ namespace BankDB.Customer
                 Connection.Close();
             }
 
-            return kSQLError;
+            return kFailure;
         }
 
 
@@ -228,7 +228,7 @@ namespace BankDB.Customer
          * Parameters  : int customerID, string connectionSetting
          * Return      : List<CustomerEntity> - Contain all data from the customer table          
          */
-        public CustomerEntity GetCustomerTableById(int customerID, string connectionSetting)
+        public CustomerEntity GetCustomerTableById(uint customerID, string connectionSetting)
         {
             // check whether the property is already parameterized or not
             // >> If the parameter already exist, update the value

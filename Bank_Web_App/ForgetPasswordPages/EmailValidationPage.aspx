@@ -31,7 +31,8 @@
         }
      
 
-        function TimerReset() {            minutes = 5
+        function TimerReset() {
+            minutes = 5
             seconds = 0;
             var timerElement = document.getElementById("timer");
             var formattedTime = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;

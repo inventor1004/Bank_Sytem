@@ -29,7 +29,7 @@
                     </div>                   
                         <asp:TextBox runat="server" id="EmailInput" placeholder="Enter your email address"></asp:TextBox>
                     <div style="margin-bottom: 10px;">
-                        <asp:Label ID="EmailInvalidErrorMessage" runat="server" 
+                        <asp:Label ID="EmailInvalidErrorMessage" runat="server" Visible="false"
                             Text ="Invalid email address. Please check your email again"></asp:Label>
                         <asp:Button runat="server" ID="EmailSubmitBtn" Text="submit" OnClick="EmailSubmitBtn_Click"/>
                     </div>                        
