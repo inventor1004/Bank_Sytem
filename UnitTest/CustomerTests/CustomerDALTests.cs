@@ -142,7 +142,7 @@ namespace UnitTest
             try
             {
                 // Pass the valid email address which exists in Customer Table
-                int customerID = customerDAL.GetCustomerIDByEmail("TestEmail@gmail.com");
+                uint customerID = customerDAL.GetCustomerIDByEmail("TestEmail@gmail.com");
                 Assert.IsTrue(customerID > 0);
             }
             catch(Exception ex) 
@@ -167,8 +167,8 @@ namespace UnitTest
             try
             {
                 // Pass the invalid email address which does not exist in Customer Table
-                int customerID = customerDAL.GetCustomerIDByEmail("Invalid@gmail.com");
-                Assert.IsTrue(customerID == -2);
+                uint customerID = customerDAL.GetCustomerIDByEmail("Invalid@gmail.com");
+                Assert.IsTrue(customerID == 0);
             }
             catch (Exception ex)
             {
