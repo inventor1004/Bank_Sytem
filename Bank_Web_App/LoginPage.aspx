@@ -23,6 +23,12 @@
                 </div>
             </div>
 
+            <div>
+                <asp:Label ID="IDPWErrorMessage" runat="server" 
+                 Text = "Email or password doesn't match"
+                 Visible = "false" style="font-size:20px" ForeColor="red"></asp:Label>
+            </div>
+
             <asp:Button runat="server" ID="LoginButton" text="Login" OnClick="LoginButton_Click"/>
 
             <div>

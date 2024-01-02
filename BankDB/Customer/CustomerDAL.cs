@@ -406,5 +406,75 @@ namespace BankDB.Customer
 
             return kFailure;
         }
+
+
+        /*
+         * Function	   : IsPasswordValid()
+         * Description : Check whether the password is matched with the email in customer database
+         * Parameters  : string email, string Password
+         * Return      : bool kSuccess = true
+         *                    kFailure = false
+         */
+        public bool IsPasswordValid(string email, string Password)
+        {
+            const bool kSuccess = true, kFailure = false;
+            if (string.IsNullOrEmpty(email))
+            {
+                return kFailure;
+            }
+
+            // Parameterize email input before the SQL conneciton
+            if (Command.Parameters.Contains("@Email"))
+            {
+                Command.Parameters["@Email"].Value = email;
+            }
+            else
+            {
+                Command.Parameters.Add("@Email", MySqlDbType.VarChar, kEmailMaxSize).Value = email;
+            }
+
+            // Parameterize Password input before the SQL conneciton
+            if (Command.Parameters.Contains("@Password"))
+            {
+                Command.Parameters["@Password"].Value = Password;
+            }
+            else
+            {
+                Command.Parameters.Add("@Password", MySqlDbType.VarChar, kPasswordMaxSize).Value = Password;
+            }
+
+            // SQL command
+            // >> Retrieve password based on the given email
+            string sqlCmd = "SELECT Password FROM Customer WHERE Email = @Email;";
+
+            try
+            {
+                Command.CommandText = sqlCmd;
+                Connection.Open();
+                Reader = Command.ExecuteReader();
+                Reader.Read();
+
+                // Check the matched password based on whether the email exists or not
+                // and the database password and input password matches or not.
+                if (Reader["Password"] != DBNull.Value)
+                {
+                    if (Reader["Password"].ToString() == Password)
+                    {
+                        return kSuccess;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.Log(DateTime.Now.ToString() + ": " + ex.Message.ToString());
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+            return kFailure;
+        }
+
     }
 }
